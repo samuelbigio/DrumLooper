@@ -1,5 +1,5 @@
 import pygame
-from Buttons import  Btn
+from Buttons import toggleButton
 
 
 class Game:
@@ -16,7 +16,7 @@ class Game:
         self.red = (180, 30, 30)
         self.bright_red = (255, 0, 0)
 
-        self.largeText = pygame.font.Font('freesansbold.ttf', 30)
+        self.largeText = pygame.font.Font('freesansbold.ttf', 10)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
@@ -24,7 +24,9 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.butt = Btn(self)
+        self.butt1 = toggleButton(self)
+        self.butt2 = toggleButton(self)
+        self.butt3 = toggleButton(self)
 
 
 
@@ -44,12 +46,14 @@ class Game:
 
                 self.gameDisplay.fill(self.white)
 
-                self.butt.button("Beluga Whale dolphin", 20, 20, 200, 200, self.red, self.bright_red)
-                self.butt.button("", 300, 300, 60, 60, self.red, (100, 50, 255))
+                self.butt1.button("Beluga Whale dolphin", 20, 20, 200, 200, self.red, self.bright_red)
+                self.butt2.button("", 300, 300, 60, 60, self.red, (100, 50, 255))
+
+                self.butt3.button("HUGE", 650, 500, 100, 20, (100,200,0), (100, 50, 255))
     
-                TextSurf, TextRect = self.text_objects(str(event), self.largeText,self.bright_red)
-                TextRect.center = ((self.displayW / 10), (self.displayH * .9))
-                self.gameDisplay.blit(TextSurf, TextRect)
+                #TextSurf, TextRect = self.text_objects(str(event), self.largeText,self.bright_red)
+                #TextRect.center = ((self.displayW / 10), (self.displayH * .9))
+                #self.gameDisplay.blit(TextSurf, TextRect)
 
 
 
