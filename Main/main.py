@@ -8,16 +8,18 @@ displayW = 800
 displayH = 600
 
 black = (0,0,0)
-white = (255, 255, 255)
+white = (205, 205, 255)
 red = (180,30,30)
 bright_red = (255,0,0)
 
-largeText = pygame.font.Font('freesansbold.ttf',10)
+largeText = pygame.font.Font('freesansbold.ttf',30)
 
 gameDisplay = pygame.display.set_mode((displayW, displayH))
+#gameDisplay2 = pygame.display.set_mode((displayW, displayH))
 pygame.display.set_caption('Never follow their dreams')
+
 clock = pygame.time.Clock()
-pygame.mixer_music.play(-1)
+
 
 def text_objects(text,font, color =black):
     textSurface = font.render(text,True,color)
@@ -36,8 +38,10 @@ def button(name,x,y,w,h,deafultColor,otherColor):
 
     if mouse[0] < (x+w) and (y+h > mouse[1]):
         pygame.draw.rect(gameDisplay, otherColor, (x, y, w, h))
+        #pygame.draw.circle(gameDisplay,otherColor,(x+w/2,y+h/2),10)
         if click[0] == 1:
             #pass #is clicked
+            pygame.mixer_music.play(-1)
             pygame.draw.rect(gameDisplay, white, (x, y, w, h))
 
 
@@ -57,17 +61,21 @@ def game_loop():
 
             gameDisplay.fill(white)
 
-            button("Start",20,20,200,200,red,bright_red)
-            button("", 300, 300, 20, 20, red, bright_red)
+
+            button("Beluga Whale dolphin",20,20,200,200,red,bright_red)
+            button("", 300, 300, 60, 60, red, (100,50,255))
+
+            TextSurf, TextRect = text_objects(str(event), largeText)
+            TextRect.center = ((displayW/10),(displayH * .9))
+            gameDisplay.blit(TextSurf,TextRect)
+
 
 
             """
-            TextSurf, TextRect = text_objects(Buttonstring, largeText)
-            TextRect.center = ((displayW/3),(displayH/2))
 
             TextSurf2, TextRect2 = text_objects(Buttonstring, largeText, red)
             TextRect2.center = ((displayW *2 / 3), (displayH/ 2))
-            gameDisplay.blit(TextSurf,TextRect)
+            
             gameDisplay.blit(TextSurf2, TextRect2)
             """
 
