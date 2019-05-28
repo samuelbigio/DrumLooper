@@ -12,8 +12,10 @@ class Game:
         self.displayH = 600
 
         self.black = (0, 0, 0)
-        self.white = (205, 205, 255)
+        self.white = (255, 255, 255)
+        self.lightpurple = (205, 205, 255)
         self.red = (180, 30, 30)
+        self.green = (0,255,0)
         self.bright_red = (255, 0, 0)
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
@@ -24,11 +26,10 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.butt1 = toggleButton(self)
-        self.butt2 = toggleButton(self)
-        self.butt3 = toggleButton(self)
+        self.numButtonRow = 4
+        self.numButtonCol=  4
 
-
+        self.makeButtons()
 
 
 
@@ -44,12 +45,11 @@ class Game:
                     end = True
                 # print (event)
 
-                self.gameDisplay.fill(self.white)
+                self.gameDisplay.fill(self.lightpurple)
+                self.readButtons()
 
-                self.butt1.button("Beluga Whale dolphin", 20, 20, 200, 200, self.red, self.bright_red)
-                self.butt2.button("", 300, 300, 60, 60, self.red, (100, 50, 255))
 
-                self.butt3.button("HUGE", 650, 500, 100, 20, (100,200,0), (100, 50, 255))
+
     
                 #TextSurf, TextRect = self.text_objects(str(event), self.largeText,self.bright_red)
                 #TextRect.center = ((self.displayW / 10), (self.displayH * .9))
@@ -58,6 +58,12 @@ class Game:
 
 
             """
+            
+            
+                self.butt1.button("", 20, 20, 200, 200, self.red, self.bright_red)
+                self.butt2.button("", 300, 300, 60, 60, self.red, self.bright_red)
+
+                self.butt3.button("", 650, 500, 100, 20, self.red, self.bright_red)
 
             TextSurf2, TextRect2 = text_objects(Buttonstring, largeText, red)
             TextRect2.center = ((displayW *2 / 3), (displayH/ 2))
@@ -74,3 +80,28 @@ class Game:
 
 
 
+    def makeButtons(self):
+        self.ToggleButton = [[0 for i in range(self.numButtonCol)] for j in range(self.numButtonRow)]
+
+        for i in range(self.numButtonRow):
+            for j in range(self.numButtonCol):
+                ## Button Innit
+                self.ToggleButton[i][j] = toggleButton(self)
+
+
+
+
+    def readButtons(self):
+
+
+        for i in range(self.numButtonRow):
+            for j in range(self.numButtonCol):
+                ## Button Innit
+
+
+                self.ToggleButton[i][j].button("", int(self.displayW*.1 + i* (self.displayW/self.numButtonRow)),
+                                               int(self.displayH*.1 + j*(self.displayH/self.numButtonCol)) , 20 , 20,
+                                               self.red,
+                                               self.bright_red)
+
+                ## make button
