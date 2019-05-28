@@ -8,8 +8,8 @@ class Game:
         pygame.mixer.init()
         pygame.mixer.music.load('belugaremix.mp3')
 
-        self.displayW = 800
-        self.displayH = 600
+        self.displayW = 600#00
+        self.displayH = 600#600
 
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
@@ -26,8 +26,8 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.numButtonRow = 40
-        self.numButtonCol=  30
+        self.numButtonRow = 4
+        self.numButtonCol=  8
 
         self.makeButtons()
 
@@ -60,10 +60,13 @@ class Game:
 
 
     def makeButtons(self):
-        self.ToggleButton = [[0 for i in range(self.numButtonCol)] for j in range(self.numButtonRow)]
+        self.ToggleButton = [[0 for i in range(self.numButtonRow)] for j in range(self.numButtonCol)]
 
-        for i in range(self.numButtonRow):
-            for j in range(self.numButtonCol):
+
+
+
+        for i in range(self.numButtonCol):
+            for j in range(self.numButtonRow):
                 ## Button Innit
                 self.ToggleButton[i][j] = toggleButton(self)
 
@@ -72,14 +75,25 @@ class Game:
 
     def readButtons(self):
 
+        buttonSize = 20
+        # grabs half the white space left and centers it
+        xBuffer = (self.displayW  - (self.displayW/self.numButtonCol* (self.numButtonCol-1)))/2 - buttonSize/2
+        yBuffer = (self.displayH - (self.displayH / self.numButtonRow * (self.numButtonRow - 1))) / 2 - buttonSize/2
 
-        for i in range(self.numButtonRow):
-            for j in range(self.numButtonCol):
+
+
+        #yBuffer= (self.displayH - self.numButtonCol * buttonSize)/2
+
+
+
+
+        for i in range(self.numButtonCol):
+            for j in range(self.numButtonRow):
                 ## Button Innit
 
 
-                self.ToggleButton[i][j].button("", int( i* (self.displayW/self.numButtonRow)),
-                                               int( j*(self.displayH/self.numButtonCol)) , 20 , 20,
+                self.ToggleButton[i][j].button("", int(xBuffer + i* (self.displayW/self.numButtonCol)),
+                                               int(yBuffer+   j*(self.displayH/self.numButtonRow)) , buttonSize , buttonSize,
                                                self.red,
                                                self.bright_red)
 
