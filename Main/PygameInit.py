@@ -26,8 +26,8 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.numButtonRow = 4
-        self.numButtonCol=  4
+        self.numButtonRow = 40
+        self.numButtonCol=  30
 
         self.makeButtons()
 
@@ -49,27 +49,6 @@ class Game:
                 self.readButtons()
 
 
-
-    
-                #TextSurf, TextRect = self.text_objects(str(event), self.largeText,self.bright_red)
-                #TextRect.center = ((self.displayW / 10), (self.displayH * .9))
-                #self.gameDisplay.blit(TextSurf, TextRect)
-
-
-
-            """
-            
-            
-                self.butt1.button("", 20, 20, 200, 200, self.red, self.bright_red)
-                self.butt2.button("", 300, 300, 60, 60, self.red, self.bright_red)
-
-                self.butt3.button("", 650, 500, 100, 20, self.red, self.bright_red)
-
-            TextSurf2, TextRect2 = text_objects(Buttonstring, largeText, red)
-            TextRect2.center = ((displayW *2 / 3), (displayH/ 2))
-
-            gameDisplay.blit(TextSurf2, TextRect2)
-            """
 
             pygame.display.update()
             self.clock.tick(60)
@@ -99,8 +78,8 @@ class Game:
                 ## Button Innit
 
 
-                self.ToggleButton[i][j].button("", int(self.displayW*.1 + i* (self.displayW/self.numButtonRow)),
-                                               int(self.displayH*.1 + j*(self.displayH/self.numButtonCol)) , 20 , 20,
+                self.ToggleButton[i][j].button("", int( i* (self.displayW/self.numButtonRow)),
+                                               int( j*(self.displayH/self.numButtonCol)) , 20 , 20,
                                                self.red,
                                                self.bright_red)
 
