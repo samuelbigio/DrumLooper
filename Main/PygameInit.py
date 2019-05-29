@@ -2,6 +2,9 @@ import pygame
 import Buttons
 from Buttons.ToggleButtons import toggleBtn
 from Buttons.PlayBtn import Play
+import sys
+
+
 
 
 
@@ -9,7 +12,12 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load('belugaremix.mp3')
+
+
+
+        #pygame.mixer.music.load('belugaremix.mp3')
+        pygame.mixer.music.load('Sounds/kit1/FLS_Kick 01.wav')
+        pygame.mixer.music.play(-1)
 
         self.displayW = 800#00
         self.displayH = 600#600

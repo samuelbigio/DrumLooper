@@ -27,6 +27,9 @@ class Play:
 
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
+            pygame.mixer.music.pause()
+
+
         else:
             #pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
             pygame.draw.circle(self.game.gameDisplay, self.game.green, (x + w / 2, y + h / 2), 20)
@@ -66,6 +69,10 @@ class Play:
                            #print self.game.ToggleButton[i][j]
 
                     print self.states
+                    pygame.mixer.music.unpause()
+
+
+
 
 
 

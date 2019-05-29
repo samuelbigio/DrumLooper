@@ -6,6 +6,7 @@ import pygame
 def main():
     game = Game()
     game.game_loop()
+    pygame.mixer.quit()
     pygame.quit()
     quit()
 
