@@ -1,5 +1,7 @@
 import pygame
-from Buttons import toggleButton
+import Buttons
+from Buttons.ToggleButtons import toggleBtn
+
 
 
 class Game:
@@ -68,7 +70,7 @@ class Game:
         for i in range(self.numButtonCol):
             for j in range(self.numButtonRow):
                 ## Button Innit
-                self.ToggleButton[i][j] = toggleButton(self)
+                self.ToggleButton[i][j] = toggleBtn(self)
 
 
 

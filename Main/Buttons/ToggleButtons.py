@@ -1,7 +1,7 @@
 import pygame
 
 
-class toggleButton:
+class toggleBtn:
 
     def __init__(self,game):
         self.game = game
