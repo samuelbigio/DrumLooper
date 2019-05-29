@@ -1,6 +1,7 @@
 import pygame
 import Buttons
 from Buttons.ToggleButtons import toggleBtn
+from Buttons.PlayBtn import Play
 
 
 
@@ -10,7 +11,7 @@ class Game:
         pygame.mixer.init()
         pygame.mixer.music.load('belugaremix.mp3')
 
-        self.displayW = 600#00
+        self.displayW = 800#00
         self.displayH = 600#600
 
         self.black = (0, 0, 0)
@@ -32,6 +33,7 @@ class Game:
         self.numButtonCol=  8
 
         self.makeButtons()
+        self.play = Play(self)
 
 
 
@@ -49,6 +51,8 @@ class Game:
 
                 self.gameDisplay.fill(self.lightpurple)
                 self.readButtons()
+
+                self.play.button("play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
 
 
 
