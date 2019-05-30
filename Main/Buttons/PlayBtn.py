@@ -27,7 +27,7 @@ class Play:
 
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
-            pygame.mixer.music.pause()
+            #pygame.mixer.music.pause()
 
 
         else:
@@ -69,8 +69,9 @@ class Play:
                            #print self.game.ToggleButton[i][j]
 
                     print self.states
-                    pygame.mixer.music.unpause()
 
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound(''))
+                    #pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds\kit1\rim.mp3'))
 
 
 
