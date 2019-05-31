@@ -1,21 +1,25 @@
 import scipy
 from pydub import AudioSegment
-
-sound1 = AudioSegment.from_wav('Sounds/kit1/crash.wav')
-
-
-last_mil = sound1[:1000]
+import time
 
 
-for i in xrange(1000):
-    last_mil +=last_mil
+sound1 = AudioSegment.from_wav('Sounds/kit1/blank.wav')
 
-
-last_mil.export('Sounds/kit1/blank.wav', format = "wav")
+start_time = time.time()
+#last_mil = sound1[-10:]
 
 
 
+#last_mil.export('Sounds/kit1/blank.wav', format = "wav")
 
 
 
+#for i in range(10):
+ #   sound1 +=sound1
+
+sound1.export('Sounds/kit1/blank2.wav', format = "wav")
+
+
+
+print("--- %s seconds ---" % (time.time() - start_time))
 

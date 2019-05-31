@@ -82,25 +82,7 @@ class Play:
                     x = .25
 
                     #pygame.mixer.Channel(0).play(pygame.mixer.Sound(''))
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
-                    time.sleep(x)
-                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/blank.wav'))
 
 
 
