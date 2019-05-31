@@ -16,7 +16,8 @@ class Game:
 
 
         #pygame.mixer.music.load('belugaremix.mp3')
-        pygame.mixer.music.load('Sounds/kit1/kick.mp3')
+        #pygame.mixer.music.load('Sounds/kit1/kick.mp3')
+        #pygame.mixer.music.play(-1)
 
 
         self.displayW = 800#00

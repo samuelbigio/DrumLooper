@@ -1,5 +1,5 @@
 import pygame
-
+import time
 
 class Play:
 
@@ -70,9 +70,37 @@ class Play:
 
                     print self.states
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound(''))
-                    #pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds\kit1\rim.mp3'))
+                    # 1
 
+                    # pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
+                    pygame.draw.circle(self.game.gameDisplay, self.game.green, (x + w / 2, y + h / 2), 20)
+                    TextSurf, TextRect = self.game.text_objects("stop", self.game.largeText)
+                    TextRect.center = ((x + w / 2), (y + h / 2))
+
+                    self.game.gameDisplay.blit(TextSurf, TextRect)
+
+                    x = .25
+
+                    #pygame.mixer.Channel(0).play(pygame.mixer.Sound(''))
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/kick.wav'))
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
+                    time.sleep(x)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound('Sounds/kit1/shaker.wav'))
 
 
 
