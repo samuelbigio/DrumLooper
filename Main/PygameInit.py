@@ -2,10 +2,6 @@ import pygame
 import Buttons
 from Buttons.ToggleButtons import toggleBtn
 from Buttons.PlayBtn import Play
-import sys
-
-
-
 
 
 class Game:
@@ -40,7 +36,7 @@ class Game:
 
 
         #todo check how many soundnames there are
-        self.numButtonRow = 8
+        self.numButtonRow = 4
         self.numButtonCol=  8
 
         self.makeButtons()
@@ -48,7 +44,7 @@ class Game:
 
 
         #todo bpm button
-        self.play.bpm = 90
+        self.play.bpm = 95
         #'Sounds/kit1/kick.wav'
 
         #todo make sound and kit load auttomatically
