@@ -1,5 +1,8 @@
 import pygame
 import time
+from pydub import AudioSegment
+
+
 
 class Play:
 
@@ -38,6 +41,7 @@ class Play:
 
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
+
         if (( mouse[0] < (x + w) and mouse[0] > x ) and ( mouse[1] < (y+h) and mouse[1] > y ) ):
 
             if self.toggleState ==0:
@@ -56,6 +60,8 @@ class Play:
 
                 self.toggleState ^= 1
 
+                start_time = time.time()
+
                 if self.toggleState == 1:
 
                     self.states = [[0 for i in range(self.game.numButtonCol)] for j in
@@ -68,22 +74,70 @@ class Play:
                             self.states[j][i] = self.game.ToggleButton[i][j].toggleState
                            #print self.game.ToggleButton[i][j]
 
-                    print self.states
+                    #print self.states
 
-                    # 1
+                    beat_in_milli = 60.0 / self.bpm * 1000 /2
+
+                    blankBeat =  AudioSegment.silent(duration=beat_in_milli)
+
+
+
+                    sounds = [0] * len(self.states)
+                    for i in range (len(self.states)):
+
+                        sounds[i] = AudioSegment.from_wav(self.soundNames[i])
+                        if len(sounds[i])>beat_in_milli:
+                            sounds[i]= sounds[i][:beat_in_milli]
+                        else:
+                            blanktime = beat_in_milli - len(sounds[i])
+                            blank = AudioSegment.silent(duration=blanktime)
+                            sounds[i] += blank
+
+
+                        newsound =0
+                        for j in range(len(self.states[0])):
+                            if self.states[i][j] == 0:
+                                newsound += blankBeat
+                            else:
+                                newsound += sounds[i]
+
+
+
+                        sounds[i] = newsound
+
+
+                    for i in range(1,len(sounds)):
+                        sounds[0] = sounds[0].overlay(sounds[i],position=0)
+
+                    sounds[0].export('Sounds/kit1/loop.wav', format="wav")
+
+                    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+
+
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/loop.wav'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     # pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
-                    pygame.draw.circle(self.game.gameDisplay, self.game.green, (x + w / 2, y + h / 2), 20)
-                    TextSurf, TextRect = self.game.text_objects("stop", self.game.largeText)
-                    TextRect.center = ((x + w / 2), (y + h / 2))
-
-                    self.game.gameDisplay.blit(TextSurf, TextRect)
-
-                    x = .25
-
-                    #pygame.mixer.Channel(0).play(pygame.mixer.Sound(''))
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/blank.wav'))
 
 
 
+                #TODO: GET STATES. ASSIGN AN INSTRUMENT PER ROW
+                # USE PYDUB TO MAKE TRACKS AND OVERLAY THEM ALL.
+                # PLAY THE TRACK IN A DIFFERENT THREAD.
+                # TO MAKE THE TRACKS MAKE SURE YOU USE DYNAMIC TIME.
 
