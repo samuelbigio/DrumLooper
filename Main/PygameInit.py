@@ -38,11 +38,33 @@ class Game:
 
         self.clock = pygame.time.Clock()
 
-        self.numButtonRow = 4
+
+        #todo check how many soundnames there are
+        self.numButtonRow = 8
         self.numButtonCol=  8
 
         self.makeButtons()
         self.play = Play(self)
+
+
+        #todo bpm button
+        self.play.bpm = 90
+        #'Sounds/kit1/kick.wav'
+
+        #todo make sound and kit load auttomatically
+        self.play.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
+
+        for i in range(len(self.play.soundNames)):
+            self.play.soundNames[i] = 'Sounds/kit1/' +self.play.soundNames[i] + '.wav'
+
+
+
+
+
+
+
+
+
 
 
 
@@ -63,6 +85,7 @@ class Game:
 
                 self.play.button("play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
 
+                #todo: loop beat
 
 
             pygame.display.update()

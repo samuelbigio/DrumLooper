@@ -4,20 +4,17 @@ import time
 
 
 sound1 = AudioSegment.from_wav('Sounds/kit1/blank.wav')
+kick = sound1 = AudioSegment.from_wav('Sounds/kit1/kick.wav')
+print len(kick)
 
+
+exit()
 start_time = time.time()
-#last_mil = sound1[-10:]
 
-
-
-#last_mil.export('Sounds/kit1/blank.wav', format = "wav")
-
-
-
-#for i in range(10):
+#for i in range(3):
  #   sound1 +=sound1
 
-sound1.export('Sounds/kit1/blank2.wav', format = "wav")
+#sound1.export('Sounds/kit1/blank2.wav', format = "wav")
 
 
 
