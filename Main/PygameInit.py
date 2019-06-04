@@ -2,6 +2,7 @@ import pygame
 import Buttons
 from Buttons.ToggleButtons import toggleBtn
 from Buttons.PlayBtn import Play
+from Buttons.dial import DialBtn
 
 
 class Game:
@@ -37,13 +38,12 @@ class Game:
 
         #todo check how many soundnames there are
         self.numButtonRow = 4
-        self.numButtonCol=  8
+        self.numButtonCol=  16
 
         self.makeButtons()
         self.play = Play(self)
+        self.dial = DialBtn(self, )
 
-
-        #todo bpm button
         self.play.bpm = 95
         #'Sounds/kit1/kick.wav'
 
@@ -52,18 +52,6 @@ class Game:
 
         for i in range(len(self.play.soundNames)):
             self.play.soundNames[i] = 'Sounds/kit1/' +self.play.soundNames[i] + '.wav'
-
-
-
-
-
-
-
-
-
-
-
-
 
     def game_loop(self):
         end = False
@@ -86,6 +74,9 @@ class Game:
 
             pygame.display.update()
             self.clock.tick(60)
+
+
+
 
     def text_objects(self,text, font, color = (0,0,0)):
         textSurface = font.render(text, True, color)

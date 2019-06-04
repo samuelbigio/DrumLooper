@@ -76,7 +76,7 @@ class Play:
 
                     #print self.states
 
-                    beat_in_milli = 60.0 / self.bpm * 1000 /2
+                    beat_in_milli = 60.0 / self.bpm * 1000 /4
 
                     blankBeat =  AudioSegment.silent(duration=beat_in_milli)
 
