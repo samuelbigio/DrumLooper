@@ -26,12 +26,14 @@ class Game:
         self.red = (180, 30, 30)
         self.green = (0,255,0)
         self.bright_red = (255, 0, 0)
+        self.orange = (255,115,0)
+        self.orangehue = (255, 90, 10)
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
-        pygame.display.set_caption('Never follow their dreams')
+        pygame.display.set_caption('Samuel Bigio - Drum Looper')
 
         self.clock = pygame.time.Clock()
 
@@ -42,9 +44,16 @@ class Game:
 
         self.makeButtons()
         self.play = Play(self)
-        self.dial = DialBtn(self, )
 
-        self.play.bpm = 95
+        dialCenter = (25,30)
+        dialColors = [self.orange,self.orangehue]
+        dialPL = self.getDialPL(dialCenter,20)
+
+
+        self.dialUp = DialBtn(self, 1, dialPL[0], dialColors)
+        self.dialDown = DialBtn(self, 0, dialPL[1], dialColors)
+
+        self.bpm = 95
         #'Sounds/kit1/kick.wav'
 
         #todo make sound and kit load auttomatically
@@ -68,6 +77,9 @@ class Game:
                 self.readButtons()
 
                 self.play.button("play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
+
+                self.dialUp.getMove()
+                self.dialDown.getMove()
 
                 #todo: loop beat
 
@@ -123,3 +135,25 @@ class Game:
                                                self.bright_red)
 
                 ## make button
+
+
+    def getDialPL(self,center,R):
+        resUp = [(0,0),(0,0),(0,0)]
+        resDown = [(0,0),(0,0),(0,0)]
+
+
+        resDown[0]= (center[0] + R/2., R/4 + center[1])
+        resDown[1]= (center[0] - R/2., R/4 + center[1])
+        resDown[2]= (center[0],  R*5/4. + center[1])
+
+        resUp[0] = (center[0] + R/2., center[1] - R/4)
+        resUp[1] = (center[0] - R/2., center[1] - R/4 )
+        resUp[2] = (center[0], center[1] - R*5./4)
+
+        res = [resUp, resDown]
+        return res
+
+
+
+# ESTABLISH PL AS A LIST FROM THE CENTER [ [(R/2, R), (R/2, -R), (0, R/2 + R)],
+#                                        [(-R/2, R), (-R/2, -R), (0, -R/2 - R)]

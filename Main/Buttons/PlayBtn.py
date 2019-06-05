@@ -12,6 +12,7 @@ class Play:
 
 
 
+
     def button(self,name, x, y, w, h, deafultColor, otherColor):
 
 
@@ -55,9 +56,7 @@ class Play:
 
             #pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
             if click[0] == 1:
-
-
-
+                self.bpm = self.game.bpm
                 self.toggleState ^= 1
 
                 start_time = time.time()
