@@ -59,7 +59,7 @@ class DialBtn:
                     if self.game.bpm>60:
                         self.game.bpm -=1
 
-                print self.game.bpm
+
 
 
 

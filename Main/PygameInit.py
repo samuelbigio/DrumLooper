@@ -9,6 +9,8 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
+        playFile = 'Sounds/kit1/loop.wav'
+        pygame.mixer.music.load(playFile)
 
 
 
@@ -45,9 +47,10 @@ class Game:
         self.makeButtons()
         self.play = Play(self)
 
-        dialCenter = (25,30)
+        self.dialCenter = (25,30)
         dialColors = [self.orange,self.orangehue]
-        dialPL = self.getDialPL(dialCenter,20)
+        self.dialRadius = 20
+        dialPL = self.getDialPL(self.dialCenter,self.dialRadius)
 
 
         self.dialUp = DialBtn(self, 1, dialPL[0], dialColors)
@@ -80,6 +83,7 @@ class Game:
 
                 self.dialUp.getMove()
                 self.dialDown.getMove()
+                self.printBPM()
 
                 #todo: loop beat
 
@@ -154,6 +158,8 @@ class Game:
         return res
 
 
+    def printBPM(self):
+        TextSurf, TextRect = self.text_objects(str(self.bpm), self.largeText)
+        TextRect.center = (self.dialCenter)
+        self.gameDisplay.blit(TextSurf, TextRect)
 
-# ESTABLISH PL AS A LIST FROM THE CENTER [ [(R/2, R), (R/2, -R), (0, R/2 + R)],
-#                                        [(-R/2, R), (-R/2, -R), (0, -R/2 - R)]

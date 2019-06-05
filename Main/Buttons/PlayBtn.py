@@ -43,6 +43,8 @@ class Play:
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
 
+
+
         if (( mouse[0] < (x + w) and mouse[0] > x ) and ( mouse[1] < (y+h) and mouse[1] > y ) ):
 
             if self.toggleState ==0:
@@ -108,15 +110,18 @@ class Play:
                     for i in range(1,len(sounds)):
                         sounds[0] = sounds[0].overlay(sounds[i],position=0)
 
-                    sounds[0].export('Sounds/kit1/loop.wav', format="wav")
+                    playFile= 'Sounds/kit1/loop5.wav'
+                    sounds[0].export('Sounds/kit1/loop5.wav', format="wav")
 
                     print("--- %s seconds ---" % (time.time() - start_time))
 
 
 
 
-                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/loop.wav'))
+                    #pygame.mixer.Channel(0).play(pygame.mixer.Sound('Sounds/kit1/loop.wav'))
 
+                    pygame.mixer.music.load(playFile)
+                    pygame.mixer.music.play(-1)
 
 
 
