@@ -4,6 +4,7 @@ from pydub import AudioSegment
 
 
 
+
 class Play:
 
     def __init__(self,game):
@@ -59,6 +60,7 @@ class Play:
             #pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
             if click[0] == 1:
                 self.bpm = self.game.bpm
+
                 self.toggleState ^= 1
 
                 start_time = time.time()
@@ -107,10 +109,14 @@ class Play:
                         sounds[i] = newsound
 
 
+
                     for i in range(1,len(sounds)):
                         sounds[0] = sounds[0].overlay(sounds[i],position=0)
 
                     playFile= 'Sounds/kit1/loop5.wav'
+                    pygame.mixer.music.pause()
+                    pygame.mixer.music.load('Sounds/kit1/snare.wav')
+
                     sounds[0].export('Sounds/kit1/loop5.wav', format="wav")
 
                     print("--- %s seconds ---" % (time.time() - start_time))
@@ -123,6 +129,9 @@ class Play:
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
 
+
+                else:
+                    pygame.mixer.music.pause()
 
 
 
