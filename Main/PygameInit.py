@@ -3,29 +3,29 @@ import Buttons
 from Buttons.ToggleButtons import toggleBtn
 from Buttons.PlayBtn import Play
 from Buttons.dial import DialBtn
+from Buttons.Clear import Clearbtn
 
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
+
+        # will this work if there is no loopfile?
         playFile = 'Sounds/kit1/loop.wav'
         pygame.mixer.music.load(playFile)
 
-
-
-        #pygame.mixer.music.load('belugaremix.mp3')
-        #pygame.mixer.music.load('Sounds/kit1/kick.mp3')
-        #pygame.mixer.music.play(-1)
-
-
+        #todo: prompt size
         self.displayW = 800#00
         self.displayH = 600#600
 
         self.black = (0, 0, 0)
+        self.blue = (50,100,220)
+        self.bright_blue = (0,0,255)
         self.white = (255, 255, 255)
         self.lightpurple = (205, 205, 255)
-        self.red = (180, 30, 30)
+        self.redhue = (160, 0, 10)
+        self.red = (200,0,0)
         self.green = (0,255,0)
         self.bright_red = (255, 0, 0)
         self.orange = (255,115,0)
@@ -35,33 +35,36 @@ class Game:
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
-        pygame.display.set_caption('Samuel Bigio - Drum Looper')
+        pygame.display.set_caption('Samuel Bigio - DrumLooper')
 
         self.clock = pygame.time.Clock()
-
 
         #todo check how many soundnames there are
         self.numButtonRow = 4
         self.numButtonCol=  16
 
-        self.makeButtons()
+        self.makeGridButtons()
+
+
         self.play = Play(self)
+        self.clear = Clearbtn(self)
 
+        dialColors = [self.orange, self.orangehue]
+
+        #integrate with toolbar
         self.dialCenter = (25,30)
-        dialColors = [self.orange,self.orangehue]
         self.dialRadius = 20
-        dialPL = self.getDialPL(self.dialCenter,self.dialRadius)
 
 
-        self.dialUp = DialBtn(self, 1, dialPL[0], dialColors)
-        self.dialDown = DialBtn(self, 0, dialPL[1], dialColors)
+
+        self.dialUp = DialBtn(self, 1, self.dialCenter,self.dialRadius, dialColors)
+        self.dialDown = DialBtn(self, 0, self.dialCenter,self.dialRadius, dialColors)
 
         self.bpm = 95
         #'Sounds/kit1/kick.wav'
 
         #todo make sound and kit load auttomatically
         self.play.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
-
         for i in range(len(self.play.soundNames)):
             self.play.soundNames[i] = 'Sounds/kit1/' +self.play.soundNames[i] + '.wav'
 
@@ -80,6 +83,12 @@ class Game:
                 self.readButtons()
 
                 self.play.button("play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
+
+
+                #todo: center
+                self.clear.button("clear", self.displayW / 2 +50, self.displayH / 2 , 20, 20, self.blue,
+                                  self.bright_blue)
+
 
                 self.dialUp.getMove()
                 self.dialDown.getMove()
@@ -100,12 +109,8 @@ class Game:
 
 
 
-    def makeButtons(self):
+    def makeGridButtons(self):
         self.ToggleButton = [[0 for i in range(self.numButtonRow)] for j in range(self.numButtonCol)]
-
-
-
-
         for i in range(self.numButtonCol):
             for j in range(self.numButtonRow):
                 ## Button Innit
@@ -133,29 +138,23 @@ class Game:
                 ## Button Innit
 
 
-                self.ToggleButton[i][j].button("", int(xBuffer + i* (self.displayW/self.numButtonCol)),
-                                               int(yBuffer+   j*(self.displayH/self.numButtonRow)) , buttonSize , buttonSize,
-                                               self.red,
-                                               self.bright_red)
+                if i % 4 == 0: #make 1st beats stand out
+                    self.ToggleButton[i][j].button("", int(xBuffer + i* (self.displayW/self.numButtonCol)),
+                                                   int(yBuffer+   j*(self.displayH/self.numButtonRow)) , buttonSize , buttonSize,
+                                                   self.red,
+                                                   self.bright_red)
+
+                else:
+                    self.ToggleButton[i][j].button("", int(xBuffer + i * (self.displayW / self.numButtonCol)),
+                                                   int(yBuffer + j * (self.displayH / self.numButtonRow)), buttonSize,
+                                                   buttonSize ,
+                                                   self.redhue,
+                                                   self.bright_red)
 
                 ## make button
 
 
-    def getDialPL(self,center,R):
-        resUp = [(0,0),(0,0),(0,0)]
-        resDown = [(0,0),(0,0),(0,0)]
 
-
-        resDown[0]= (center[0] + R/2., R/4 + center[1])
-        resDown[1]= (center[0] - R/2., R/4 + center[1])
-        resDown[2]= (center[0],  R*5/4. + center[1])
-
-        resUp[0] = (center[0] + R/2., center[1] - R/4)
-        resUp[1] = (center[0] - R/2., center[1] - R/4 )
-        resUp[2] = (center[0], center[1] - R*5./4)
-
-        res = [resUp, resDown]
-        return res
 
 
     def printBPM(self):

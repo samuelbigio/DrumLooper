@@ -63,7 +63,7 @@ class Play:
 
                 self.toggleState ^= 1
 
-                start_time = time.time()
+                #start_time = time.time()
 
                 if self.toggleState == 1:
 
@@ -115,11 +115,12 @@ class Play:
 
                     playFile= 'Sounds/kit1/loop5.wav'
                     pygame.mixer.music.pause()
-                    pygame.mixer.music.load('Sounds/kit1/snare.wav')
+                    ##ghetto way of loading a new sound so pydub can't overwrite on the file that is loaded.
+                    pygame.mixer.music.load(self.soundNames[0])
 
                     sounds[0].export('Sounds/kit1/loop5.wav', format="wav")
 
-                    print("--- %s seconds ---" % (time.time() - start_time))
+                    #print("--- %s seconds ---" % (time.time() - start_time))
 
 
 

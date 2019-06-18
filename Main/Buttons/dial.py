@@ -11,11 +11,13 @@ import pygame
 # create a display for bpm
 
 class DialBtn:
-    def __init__(self,game,up, pl, colors):
+    def __init__(self,game,up, center,radius, colors):
         self.game = game
         self.up = up
         self.colors = colors
-        self.pl=pl
+
+        pl = self.getDialPL(center, radius,up)
+        self.pl = pl
 
 
 
@@ -31,7 +33,6 @@ class DialBtn:
             self. h = self.w
             self.y = pl[2][1] - self.h
 
-        print up, (self.x,self.y), self.w
 
 
         self.toggleState = 0
@@ -65,3 +66,21 @@ class DialBtn:
 
         if click[1] == 1:
             print mouse
+
+
+    def getDialPL(self,center,R,up):
+        res = [(0,0),(0,0),(0,0)]
+
+        if up:
+            res[0] = (center[0] + R / 2., center[1] - R / 4)
+            res[1] = (center[0] - R / 2., center[1] - R / 4)
+            res[2] = (center[0], center[1] - R * 5. / 4)
+
+        else:
+            res[0]= (center[0] + R/2., R/4 + center[1])
+            res[1]= (center[0] - R/2., R/4 + center[1])
+            res[2]= (center[0],  R*5/4. + center[1])
+
+
+
+        return res
