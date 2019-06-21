@@ -1,8 +1,6 @@
 import pygame
-from Main.DrumPage.Buttons import Play
-from Main.DrumPage.Buttons import Grid
-from Main.DrumPage.Buttons import DialBtn
-from Main.DrumPage.Buttons.Clear import Clearbtn
+from Main.DrumPage.Buttons.ToggleButtons import Grid
+from Main.DrumPage.ToolBar import Tool
 
 
 class Game:
@@ -46,27 +44,10 @@ class Game:
 
         self.grid2 = Grid(self)
 
-
-        self.play = Play(self,"play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
-        self.clear = Clearbtn(self,"clear", self.displayW / 2 +50, self.displayH / 2 , 20, 20, self.blue,
-                                  self.bright_blue)
-
-        dialColors = [self.orange, self.orangehue]
-
-        #integrate with toolbar
-        self.dialCenter = (self.displayW/2,self.displayH*.1/2 )
-        self.dialRadius = 20
-
-        self.dialUp = DialBtn(self, 1, self.dialCenter,self.dialRadius, dialColors)
-        self.dialDown = DialBtn(self, 0, self.dialCenter,self.dialRadius, dialColors)
+        self.toolbar = Tool(self)
 
         self.bpm = 95
-        #'Sounds/kit1/kick.wav'
 
-        #todo make sound and kit load auttomatically
-        self.play.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
-        for i in range(len(self.play.soundNames)):
-            self.play.soundNames[i] = 'Sounds/kit1/' +self.play.soundNames[i] + '.wav'
 
     def game_loop(self):
         end = False
@@ -89,13 +70,7 @@ class Game:
                 # BOTTOM BORDER
                 pygame.draw.line(self.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
 
-                self.play.button()
-                #todo: center
-                self.clear.button()
-
-
-                self.dialUp.getMove()
-                self.dialDown.getMove()
+                self.toolbar()
                 self.printBPM()
 
                 #todo: loop beat
