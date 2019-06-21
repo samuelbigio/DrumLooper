@@ -2,12 +2,27 @@ import pygame
 
 
 class Clearbtn:
-    def __init__(self,game):
+    def __init__(self,game,name, x, y, w, h, deafultColor, otherColor):
         self.game = game
+        self.toggleState=0
+        self.name = name
+        self.x =x
+        self.y=y
+        self.w = w
+        self.h = h
+        self.deafultColor = deafultColor
+        self.otherColor = otherColor
 
-    def button(self, name, x, y, w, h, deafultColor, otherColor):
+    def button(self):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
+        name = self.name
+        x= self.x
+        y=self.y
+        w =self.w
+        h=self.h
+        deafultColor = self.deafultColor
+        otherColor=self.otherColor
 
 
         pygame.draw.circle(self.game.gameDisplay, deafultColor, (x + w / 2, y + h / 2), 20)

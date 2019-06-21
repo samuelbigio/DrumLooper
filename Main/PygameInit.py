@@ -1,9 +1,8 @@
 import pygame
-import Buttons
-from Buttons.ToggleButtons import toggleBtn
-from Buttons.PlayBtn import Play
-from Buttons.dial import DialBtn
-from Buttons.Clear import Clearbtn
+from Main.DrumPage.Buttons import Play
+from Main.DrumPage.Buttons import Grid
+from Main.DrumPage.Buttons import DialBtn
+from Main.DrumPage.Buttons.Clear import Clearbtn
 
 
 class Game:
@@ -40,22 +39,23 @@ class Game:
         self.clock = pygame.time.Clock()
 
         #todo check how many soundnames there are
-        self.numButtonRow = 4
+        self.numButtonRow = 8
         self.numButtonCol=  16
 
-        self.makeGridButtons()
+        self.grid = Grid(self)
+
+        self.grid2 = Grid(self)
 
 
-        self.play = Play(self)
-        self.clear = Clearbtn(self)
+        self.play = Play(self,"play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
+        self.clear = Clearbtn(self,"clear", self.displayW / 2 +50, self.displayH / 2 , 20, 20, self.blue,
+                                  self.bright_blue)
 
         dialColors = [self.orange, self.orangehue]
 
         #integrate with toolbar
-        self.dialCenter = (25,30)
+        self.dialCenter = (self.displayW/2,self.displayH*.1/2 )
         self.dialRadius = 20
-
-
 
         self.dialUp = DialBtn(self, 1, self.dialCenter,self.dialRadius, dialColors)
         self.dialDown = DialBtn(self, 0, self.dialCenter,self.dialRadius, dialColors)
@@ -72,22 +72,26 @@ class Game:
         end = False
 
         while not end:
-
             for event in pygame.event.get():
-
                 if event.type == pygame.QUIT:
                     end = True
                 # print (event)
 
+
+
+
                 self.gameDisplay.fill(self.lightpurple)
-                self.readButtons()
+                self.grid.readButtons()
 
-                self.play.button("play", self.displayW/2,self.displayH/2, 20,20, self.red,self.bright_red)
+                # TOP BORDER
+                pygame.draw.line(self.gameDisplay,self.black,(0,self.displayH *.1),(self.displayW,self.displayH *.1), 10)
 
+                # BOTTOM BORDER
+                pygame.draw.line(self.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
 
+                self.play.button()
                 #todo: center
-                self.clear.button("clear", self.displayW / 2 +50, self.displayH / 2 , 20, 20, self.blue,
-                                  self.bright_blue)
+                self.clear.button()
 
 
                 self.dialUp.getMove()
@@ -106,53 +110,6 @@ class Game:
     def text_objects(self,text, font, color = (0,0,0)):
         textSurface = font.render(text, True, color)
         return textSurface, textSurface.get_rect()
-
-
-
-    def makeGridButtons(self):
-        self.ToggleButton = [[0 for i in range(self.numButtonRow)] for j in range(self.numButtonCol)]
-        for i in range(self.numButtonCol):
-            for j in range(self.numButtonRow):
-                ## Button Innit
-                self.ToggleButton[i][j] = toggleBtn(self)
-
-
-
-
-    def readButtons(self):
-
-        buttonSize = 20
-        # grabs half the white space left and centers it
-        xBuffer = (self.displayW  - (self.displayW/self.numButtonCol* (self.numButtonCol-1)))/2 - buttonSize/2
-        yBuffer = (self.displayH - (self.displayH / self.numButtonRow * (self.numButtonRow - 1))) / 2 - buttonSize/2
-
-
-
-        #yBuffer= (self.displayH - self.numButtonCol * buttonSize)/2
-
-
-
-
-        for i in range(self.numButtonCol):
-            for j in range(self.numButtonRow):
-                ## Button Innit
-
-
-                if i % 4 == 0: #make 1st beats stand out
-                    self.ToggleButton[i][j].button("", int(xBuffer + i* (self.displayW/self.numButtonCol)),
-                                                   int(yBuffer+   j*(self.displayH/self.numButtonRow)) , buttonSize , buttonSize,
-                                                   self.red,
-                                                   self.bright_red)
-
-                else:
-                    self.ToggleButton[i][j].button("", int(xBuffer + i * (self.displayW / self.numButtonCol)),
-                                                   int(yBuffer + j * (self.displayH / self.numButtonRow)), buttonSize,
-                                                   buttonSize ,
-                                                   self.redhue,
-                                                   self.bright_red)
-
-                ## make button
-
 
 
 
