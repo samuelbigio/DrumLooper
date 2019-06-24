@@ -7,7 +7,7 @@ class toggleBtn:
         self.game = game
         self.toggleState = 0
 
-    def button(self, name, x, y, w, h, deafultColor, otherColor):
+    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr =""):
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -23,6 +23,12 @@ class toggleBtn:
 
         else:
             pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
+
+            TextSurf, TextRect = self.game.text_objects(onStr, self.game.largeText)
+
+            TextRect.center = ((x + w / 2), (y + h / 2))
+
+            self.game.gameDisplay.blit(TextSurf, TextRect)
 
         if ((mouse[0] < (x + w) and mouse[0] > x) and (mouse[1] < (y + h) and mouse[1] > y)):
 
@@ -44,11 +50,11 @@ class Grid:
     def __init__(self, game):
         self.game = game
 
-        self.game.ToggleButton = [[0 for i in range(self.game.numButtonRow)] for j in range(self.game.numButtonCol)]
+        self.ToggleButton = [[0 for i in range(self.game.numButtonRow)] for j in range(self.game.numButtonCol)]
         for i in range(self.game.numButtonCol):
             for j in range(self.game.numButtonRow):
                 ## Button Innit
-                self.game.ToggleButton[i][j] = toggleBtn(self.game)
+                self.ToggleButton[i][j] = toggleBtn(self.game)
 
     def readButtons(self):
 
@@ -68,7 +74,7 @@ class Grid:
                 ## Button Innit
 
                 if i % 4 == 0:  # make 1st beats stand out
-                    self.game.ToggleButton[i][j].button("", int(
+                    self.ToggleButton[i][j].button("", int(
                         xBuffer + i * (self.game.displayW / self.game.numButtonCol)),
                                                         int(yBuffer + j * (
                                                                 self.game.displayH * 0.8 / self.game.numButtonRow)),
@@ -77,7 +83,7 @@ class Grid:
                                                         self.game.bright_red)
 
                 else:
-                    self.game.ToggleButton[i][j].button("", int(
+                    self.ToggleButton[i][j].button("", int(
                         xBuffer + i * (self.game.displayW / self.game.numButtonCol)),
                                                         int(yBuffer + j * (
                                                                 self.game.displayH * .8 / self.game.numButtonRow)),

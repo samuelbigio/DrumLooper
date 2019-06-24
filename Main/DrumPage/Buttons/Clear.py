@@ -46,4 +46,10 @@ class Clearbtn:
             if click[0] == 1:
                 for i in range(self.game.numButtonCol):
                     for j in range(self.game.numButtonRow):
-                        self.game.ToggleButton[i][j].toggleState = 0
+                        ## finds the measure that is on screen and clears that current grid.
+                        # takes the array of grids in game class and indexes the active measure then sets all toggle
+                        # states to zero.
+                        self.game.grid[self.game.activeMeasure].ToggleButton[i][j].toggleState = 0
+
+                self.game.measures.measureStates[self.game.activeMeasure].toggleState = 0
+

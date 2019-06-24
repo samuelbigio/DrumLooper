@@ -1,22 +1,35 @@
 import pygame
-from Buttons.PlayBtn import Play
+from Buttons.PlayBtn import PlayAll
+from Buttons.PlayBtn import PlayOne
 from Buttons.dial import DialBtn
 from Buttons.Clear import Clearbtn
+from Buttons.SelectMeasure import  Measures
 
 class Tool():
     def __init__(self,game):
         self.game= game
-        self.xBuffer = int(self.game.displayW*.05)
+        self.xBuffer = int(self.game.displayW* 2/30)
         self.yBuffer= int(self.game.displayH * .1)
-        self.game.play = Play(game,"play", 10,int(self.yBuffer/4), 20,20, self.game.red,self.game.bright_red)
-        self.game.clear = Clearbtn(game,"clear", 10 + self.xBuffer, int(self.yBuffer/4), 20, 20, self.game.blue,
-                                  self.game.bright_blue)
+        buttonsize = 20
+        widthgap= int(self.game.displayW * .05)
 
+        self.game.play = PlayAll(game,"play", widthgap,self.yBuffer/4 +buttonsize/4, buttonsize,buttonsize, self.game.red,
+                              self.game.bright_red)
+
+
+        self.game.play1 = PlayOne(game,"play", widthgap + self.xBuffer,self.yBuffer/4 +buttonsize/4, buttonsize,buttonsize, self.game.red,
+                              self.game.bright_red)
+
+        self.game.clear = Clearbtn(game,"clear", widthgap + self.xBuffer *2 , self.yBuffer/4 +buttonsize/4,
+                                   buttonsize, buttonsize,self.game.blue, self.game.bright_blue)
+
+        self.game.measures = Measures(self.game,self.xBuffer *3 + widthgap,self.game.displayH*.1/2,
+                                      self.game.numberofmeasures)
         dialColors = [self.game.orange, self.game.orangehue]
 
         #integrate with toolbar
-        self.game.dialCenter = ((self.xBuffer *2 + 10),self.game.displayH*.1/2 )
-        self.game.dialRadius = 20
+        self.game.dialCenter = ((self.xBuffer *(self.game.numberofmeasures + 2) + widthgap),self.game.displayH*.1/2)
+        self.game.dialRadius = buttonsize
 
         self.game.dialUp = DialBtn(game, 1, self.game.dialCenter,self.game.dialRadius, dialColors)
         self.game.dialDown = DialBtn(game, 0, self.game.dialCenter,self.game.dialRadius, dialColors)
@@ -24,13 +37,15 @@ class Tool():
         #'Sounds/kit1/kick.wav'
 
         #todo make sound and kit load auttomatically
-        self.game.play.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
-        for i in range(len(self.game.play.soundNames)):
-            self.game.play.soundNames[i] = 'Sounds/kit1/' +self.game.play.soundNames[i] + '.wav'
+        self.game.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
+        for i in range(len(self.game.soundNames)):
+            self.game.soundNames[i] = 'Sounds/kit1/' +self.game.soundNames[i] + '.wav'
 
     def __call__(self, *args, **kwargs):
         self.game.play.button()
+        self.game.play1.button()
         self.game.clear.button()
+        self.game.measures()
         self.game.dialUp.getMove()
         self.game.dialDown.getMove()
 

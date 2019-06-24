@@ -2,6 +2,7 @@ import pygame
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
 
+BORDER = 1
 
 class Game:
     def __init__(self):
@@ -13,7 +14,7 @@ class Game:
         pygame.mixer.music.load(playFile)
 
         #todo: prompt size
-        self.displayW = 800#00
+        self.displayW = 1800#00
         self.displayH = 600#600
 
         self.black = (0, 0, 0)
@@ -27,6 +28,8 @@ class Game:
         self.bright_red = (255, 0, 0)
         self.orange = (255,115,0)
         self.orangehue = (255, 90, 10)
+        self.buttonSize = 20
+        self.activeMeasure = 1
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
 
@@ -40,9 +43,12 @@ class Game:
         self.numButtonRow = 8
         self.numButtonCol=  16
 
-        self.grid = Grid(self)
+        self.numberofmeasures=10
+        self.grid = [0] * self.numberofmeasures
 
-        self.grid2 = Grid(self)
+        for i in range(self.numberofmeasures):
+            self.grid[i] = Grid(self)
+
 
         self.toolbar = Tool(self)
 
@@ -62,13 +68,19 @@ class Game:
 
 
                 self.gameDisplay.fill(self.lightpurple)
-                self.grid.readButtons()
 
+                for i in range(self.numberofmeasures):
+                    if i == self.activeMeasure:
+                        self.grid[i].readButtons()
+
+
+
+                if BORDER ==1:
                 # TOP BORDER
-                pygame.draw.line(self.gameDisplay,self.black,(0,self.displayH *.1),(self.displayW,self.displayH *.1), 10)
+                    pygame.draw.line(self.gameDisplay,self.black,(0,self.displayH *.1),(self.displayW,self.displayH *.1), 10)
 
                 # BOTTOM BORDER
-                pygame.draw.line(self.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
+                    pygame.draw.line(self.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
 
                 self.toolbar()
                 self.printBPM()
