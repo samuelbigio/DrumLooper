@@ -60,14 +60,6 @@ class DialBtn:
                     if self.game.bpm>60:
                         self.game.bpm -=1
 
-
-
-
-
-        if click[1] == 1:
-            print mouse
-
-
     def getDialPL(self,center,R,up):
         res = [(0,0),(0,0),(0,0)]
 

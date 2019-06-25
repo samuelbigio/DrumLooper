@@ -28,7 +28,7 @@ class Measures():
                                     , str(i +1))
 
             self.measureStates[i].button("",
-                                         self.x + i * self.game.buttonSize*2  + self.game.buttonSize *15/16,
+                                         self.x + i * self.game.buttonSize*2  + self.game.buttonSize *19/20,
                                          self.y +self.game.buttonSize + self.game.buttonSize/4,
                                          self.game.buttonSize/3,
                                          self.game.buttonSize/3,

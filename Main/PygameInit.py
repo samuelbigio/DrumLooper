@@ -2,19 +2,21 @@ import pygame
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
 
-BORDER = 1
+BORDER = 0
+Verbose = 1
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
 
+
         # will this work if there is no loopfile?
         playFile = 'Sounds/kit1/loop.wav'
         pygame.mixer.music.load(playFile)
 
         #todo: prompt size
-        self.displayW = 1800#00
+        self.displayW = 800#00
         self.displayH = 600#600
 
         self.black = (0, 0, 0)
@@ -30,6 +32,8 @@ class Game:
         self.orangehue = (255, 90, 10)
         self.buttonSize = 20
         self.activeMeasure = 1
+        self.string = "innit"
+        self.FLAG=0
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
 
@@ -43,7 +47,7 @@ class Game:
         self.numButtonRow = 8
         self.numButtonCol=  16
 
-        self.numberofmeasures=10
+        self.numberofmeasures=4
         self.grid = [0] * self.numberofmeasures
 
         for i in range(self.numberofmeasures):
@@ -62,7 +66,9 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     end = True
-                # print (event)
+
+
+
 
 
 
@@ -84,11 +90,27 @@ class Game:
 
                 self.toolbar()
                 self.printBPM()
+                self.string= pygame.time.get_ticks()
+
+
+                if Verbose == 1:
+
+
+
+                    TextSurfDebug, TextRectDebug = self.text_objects(str(self.string), self.largeText)
+                    TextRectDebug.center = (self.displayW/2, int(self.displayH * .9 + self.displayH *.05))
+                    self.gameDisplay.blit(TextSurfDebug, TextRectDebug)
 
                 #todo: loop beat
 
+                if event.type == 29:
+                    TextSurfYO, TextRectYO = self.text_objects(str("GAS"), self.largeText)
+                    TextRectYO.center = (self.displayW /4, int(self.displayH * .9 + self.displayH * .05))
+                    self.gameDisplay.blit(TextSurfYO, TextRectYO)
+
 
             pygame.display.update()
+            #self.clock.tick_busy_loop()
             self.clock.tick(60)
 
 
