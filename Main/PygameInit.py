@@ -1,15 +1,14 @@
 import pygame
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
-
-BORDER = 0
-Verbose = 1
+from Main.DrumPage.DrumMain import DrumLoop
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
 
+        self.drumMain = DrumLoop(self)
 
         # will this work if there is no loopfile?
         playFile = 'Sounds/kit1/loop.wav'
@@ -67,48 +66,8 @@ class Game:
                 if event.type == pygame.QUIT:
                     end = True
 
-
-
-
-
-
-
                 self.gameDisplay.fill(self.lightpurple)
-
-                for i in range(self.numberofmeasures):
-                    if i == self.activeMeasure:
-                        self.grid[i].readButtons()
-
-
-
-                if BORDER ==1:
-                # TOP BORDER
-                    pygame.draw.line(self.gameDisplay,self.black,(0,self.displayH *.1),(self.displayW,self.displayH *.1), 10)
-
-                # BOTTOM BORDER
-                    pygame.draw.line(self.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
-
-                self.toolbar()
-                self.printBPM()
-                self.string= pygame.time.get_ticks()
-
-
-                if Verbose == 1:
-
-
-
-                    TextSurfDebug, TextRectDebug = self.text_objects(str(self.string), self.largeText)
-                    TextRectDebug.center = (self.displayW/2, int(self.displayH * .9 + self.displayH *.05))
-                    self.gameDisplay.blit(TextSurfDebug, TextRectDebug)
-
-                #todo: loop beat
-
-                if event.type == 29:
-                    TextSurfYO, TextRectYO = self.text_objects(str("GAS"), self.largeText)
-                    TextRectYO.center = (self.displayW /4, int(self.displayH * .9 + self.displayH * .05))
-                    self.gameDisplay.blit(TextSurfYO, TextRectYO)
-
-
+                self.drumMain()
             pygame.display.update()
             #self.clock.tick_busy_loop()
             self.clock.tick(60)

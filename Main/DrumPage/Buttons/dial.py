@@ -39,7 +39,7 @@ class DialBtn:
 
 
 
-    def getMove(self):
+    def __call__(self, *args, **kwargs):
         deafultColor =  self.colors[0]
         otherColor = self.colors[1]
 

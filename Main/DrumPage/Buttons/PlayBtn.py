@@ -16,7 +16,7 @@ class PlayAll:
         self.defaultColor = defaultColor
         self.otherColor = otherColor
 
-    def button(self):
+    def __call__(self, *args, **kwargs):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         name = self.name
@@ -124,7 +124,7 @@ class PlayOne:
         self.defaultColor = defaultColor
         self.otherColor = otherColor
 
-    def button(self):
+    def __call__(self, *args, **kwargs):
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
         name = self.name
@@ -197,12 +197,6 @@ class PlayOne:
 
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
-
-                    if self.game.FLAG == 0:
-                        pygame.time.set_timer(29, int(self.game.bpm / (60.) ))
-                        self.game.string = int(self.game.bpm / (60. * 4) )
-                        print self.game.string
-                        self.game.FLAG = 1
 
 
                 else:
