@@ -59,9 +59,11 @@ class Grid:
     def readButtons(self):
 
         buttonSize = 20
-        xBuffer = (self.game.displayW - (
-                    self.game.displayW / self.game.numButtonCol * (self.game.numButtonCol - 1))) / 2 - \
-                  buttonSize / 2
+        xBuffer = (self.game.displayW *.8 - (
+                    self.game.displayW *.8/ self.game.numButtonCol * (self.game.numButtonCol - 1))) / 2 - \
+                  buttonSize / 2 + self.game.displayW * .1
+
+        self.game.xBuffer= xBuffer
 
         ## takes display height including borders and subtracts that by newdisplay height divided by rows multiplied by
         # row number. divided by 2 (to center it) including button size and offsetting it by the border.
@@ -69,13 +71,15 @@ class Grid:
                     self.game.displayH * .8 / self.game.numButtonRow * (self.game.numButtonRow - 1))) \
                   / 2 - buttonSize / 2 + self.game.displayH * .1
 
+        self.game.yBuffer = yBuffer
+
         for i in range(self.game.numButtonCol):
             for j in range(self.game.numButtonRow):
                 ## Button Innit
 
                 if i % 4 == 0:  # make 1st beats stand out
                     self.ToggleButton[i][j].button("", int(
-                        xBuffer + i * (self.game.displayW / self.game.numButtonCol)),
+                        xBuffer + i * (self.game.displayW*.8 / self.game.numButtonCol)),
                                                         int(yBuffer + j * (
                                                                 self.game.displayH * 0.8 / self.game.numButtonRow)),
                                                         buttonSize, buttonSize,
@@ -84,7 +88,7 @@ class Grid:
 
                 else:
                     self.ToggleButton[i][j].button("", int(
-                        xBuffer + i * (self.game.displayW / self.game.numButtonCol)),
+                        xBuffer + i * (self.game.displayW *.8 / self.game.numButtonCol)),
                                                         int(yBuffer + j * (
                                                                 self.game.displayH * .8 / self.game.numButtonRow)),
                                                         buttonSize,

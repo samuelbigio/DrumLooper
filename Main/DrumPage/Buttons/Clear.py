@@ -1,6 +1,5 @@
 import pygame
 
-
 class Clearbtn:
     def __init__(self,game,name, x, y, w, h, deafultColor, otherColor):
         self.game = game

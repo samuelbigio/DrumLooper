@@ -2,13 +2,12 @@ import pygame
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
 from Main.DrumPage.DrumMain import DrumLoop
+import os
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
-
-        self.drumMain = DrumLoop(self)
 
         # will this work if there is no loopfile?
         playFile = 'Sounds/kit1/loop.wav'
@@ -25,6 +24,8 @@ class Game:
         self.lightpurple = (205, 205, 255)
         self.redhue = (160, 0, 10)
         self.red = (200,0,0)
+        self.yellow = (247,217,15)
+        self.bright_yellow= (255,255,0)
         self.green = (0,255,0)
         self.bright_red = (255, 0, 0)
         self.orange = (255,115,0)
@@ -33,6 +34,8 @@ class Game:
         self.activeMeasure = 1
         self.string = "innit"
         self.FLAG=0
+        self.drumSounds = getSoundNames('Sounds')
+
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
 
@@ -46,6 +49,8 @@ class Game:
         self.numButtonRow = 8
         self.numButtonCol=  16
 
+
+
         self.numberofmeasures=4
         self.grid = [0] * self.numberofmeasures
 
@@ -57,6 +62,8 @@ class Game:
 
         self.bpm = 95
 
+        self.drumMain = DrumLoop(self)
+
 
     def game_loop(self):
         end = False
@@ -67,7 +74,13 @@ class Game:
                     end = True
 
                 self.gameDisplay.fill(self.lightpurple)
+
+
+
+
+
                 self.drumMain()
+
             pygame.display.update()
             #self.clock.tick_busy_loop()
             self.clock.tick(60)
@@ -87,3 +100,12 @@ class Game:
         TextRect.center = (self.dialCenter)
         self.gameDisplay.blit(TextSurf, TextRect)
 
+def getSoundNames(dir):
+    soundnames = []
+    count = 0
+    for filename in os.listdir(dir):
+        soundnames.append([])
+        for j in os.listdir(dir + '/' + filename):
+            soundnames[count].append(dir + '/' + filename + '/' + j)
+        count += 1
+    return soundnames

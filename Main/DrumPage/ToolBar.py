@@ -13,7 +13,7 @@ class Tool():
         self.xBuffer = int(self.game.displayW* 2/30)
         self.yBuffer= int(self.game.displayH * .1)
         buttonsize = 20
-        widthgap= int(self.game.displayW * .05)
+        widthgap= int(self.game.displayW  *.05)
 
         self.game.play = PlayAll(game,"play", widthgap,self.yBuffer/4 +buttonsize/4, buttonsize,buttonsize, self.game.red,
                               self.game.bright_red)
@@ -28,7 +28,7 @@ class Tool():
         self.game.paste = Paste(game,"Paste", widthgap + self.xBuffer *3 , self.yBuffer/4 +buttonsize/4,
                                    buttonsize, buttonsize,self.game.blue, self.game.bright_blue)
 
-        self.game.clear = Clearbtn(game,"clear", widthgap + self.xBuffer *4 , self.yBuffer/4 +buttonsize/4,
+        self.game.clear = Clearbtn(game,"Clear", widthgap + self.xBuffer *4 , self.yBuffer/4 +buttonsize/4,
                                    buttonsize, buttonsize,self.game.blue, self.game.bright_blue)
 
 
@@ -47,10 +47,7 @@ class Tool():
 
         #'Sounds/kit1/kick.wav'
 
-        #todo make sound and kit load auttomatically
-        self.game.soundNames = ['kick','snare','hhcl','hhop','ride','shaker','rim','shaker']
-        for i in range(len(self.game.soundNames)):
-            self.game.soundNames[i] = 'Sounds/kit1/' +self.game.soundNames[i] + '.wav'
+
 
     def __call__(self, *args, **kwargs):
 

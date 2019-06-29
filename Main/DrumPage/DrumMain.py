@@ -1,15 +1,28 @@
 import pygame
 import pygame
+from MISC.center_circles import CenterDesign
+from SoundTester import SoundTest
+
 
 BORDER = 0
 Verbose = 1
+DESIGN = 0
 
 class DrumLoop():
     def __init__(self,game):
         self.game= game
+        self.game.sounds = SoundTest(self.game)
+
+
+        if DESIGN is 1:
+            self.game.design = CenterDesign(self.game)
 
     def __call__(self, *args, **kwargs):
 
+
+
+        if DESIGN is 1:
+            self.game.design()
 
         for i in range(self.game.numberofmeasures):
             if i == self.game.activeMeasure:
@@ -17,19 +30,30 @@ class DrumLoop():
 
         if BORDER == 1:
             # TOP BORDER
-            pygame.draw.line(self.game.gameDisplay, self.black, (0, self.displayH * .1), (self.displayW, self.displayH * .1), 10)
-
+            pygame.draw.line(self.game.gameDisplay, self.game.black, (0, self.game.displayH * .1), (self.game.displayW, self.game.displayH * .1), 10)
             # BOTTOM BORDER
-            pygame.draw.line(self.game.gameDisplay, self.black, (0, self.displayH * .9), (self.displayW, self.displayH * .9), 10)
+            pygame.draw.line(self.game.gameDisplay, self.game.black, (0, self.game.displayH * .9), (self.game.displayW, self.game.displayH * .9), 10)
+            pygame.draw.line(self.game.gameDisplay, self.game.black,(self.game.displayW*.1, 0),(self.game.displayW*.1, self.game.displayH),10)
+            pygame.draw.line(self.game.gameDisplay, self.game.black, (self.game.displayW * .9, 0),
+                             (self.game.displayW * .9, self.game.displayH), 10)
+
+
+
+        #todo make sound and kit load auttomatically
+
 
         self.game.toolbar()
         self.game.printBPM()
         self.game.string = pygame.time.get_ticks()
+        self.game.sounds()
+
 
         if Verbose == 1:
             TextSurfDebug, TextRectDebug = self.game.text_objects(str(self.game.string), self.game.largeText)
             TextRectDebug.center = (self.game.displayW / 2, int(self.game.displayH * .9 + self.game.displayH * .05))
             self.game.gameDisplay.blit(TextSurfDebug, TextRectDebug)
+
+
 
 
 
