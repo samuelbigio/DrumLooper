@@ -1,17 +1,26 @@
 import pygame
-import pygame
 from MISC.center_circles import CenterDesign
-from SoundTester import SoundTest
+from Main.DrumPage.Buttons.SoundTester import SoundTest
+from Buttons.ModDrums import ModifyDrumKit
+
 
 
 BORDER = 0
-Verbose = 1
+Verbose = 0
 DESIGN = 0
 
 class DrumLoop():
     def __init__(self,game):
         self.game= game
         self.game.sounds = SoundTest(self.game)
+        self.game.moddrumsBtn = ModifyDrumKit(self.game,self.game.yellow,self.game.bright_yellow)
+
+
+        ## REPLACE SOON
+        self.game.soundNames = ['kick', 'snare', 'hhcl', 'hhop', 'ride', 'crash', 'rim', 'shaker']
+        for i in range(len(self.game.soundNames)):
+            self.game.soundNames[i] = 'Sounds/kit1/' + self.game.soundNames[i] + '.wav'
+
 
 
         if DESIGN is 1:
@@ -41,11 +50,13 @@ class DrumLoop():
 
         #todo make sound and kit load auttomatically
 
-
+        self.game.moddrumsBtn()
         self.game.toolbar()
         self.game.printBPM()
         self.game.string = pygame.time.get_ticks()
         self.game.sounds()
+
+
 
 
         if Verbose == 1:

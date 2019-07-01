@@ -3,11 +3,13 @@ import pygame
 
 class toggleBtn:
 
-    def __init__(self, game):
+    def __init__(self, game,stayonFlag=0):
         self.game = game
         self.toggleState = 0
+        self.stayonFlag = stayonFlag
 
     def button(self, name, x, y, w, h, deafultColor, otherColor, onStr =""):
+        self.name = name
 
         mouse = pygame.mouse.get_pos()
         click = pygame.mouse.get_pressed()
@@ -37,7 +39,12 @@ class toggleBtn:
 
             # pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
             if click[0] == 1:
-                self.toggleState ^= 1
+                if self.stayonFlag ==0:
+                    self.toggleState ^= 1
+
+                if self.stayonFlag !=0:
+                    if self.toggleState ==0:
+                        self.toggleState=1
 
                 # pass #is clicked
                 # pygame.mixer_music.play(-1)
@@ -96,35 +103,3 @@ class Grid:
                                                         self.game.redhue,
                                                         self.game.bright_red)
 
-        """
-        xBuffer = (self.game.displayW  - (self.game.displayW/self.game.numButtonCol* (self.game.numButtonCol-1)))/2 - \
-                  buttonSize/2
-        yBuffer = (self.game.displayH - (self.game.displayH / self.game.numButtonRow * (self.game.numButtonRow - 1))) \
-                 / 2 - buttonSize/2
-
-        #yBuffer = self.game.displayH - (self.game.displayH / self.game.numButtonRow)
-
-
-        for i in range(self.game.numButtonCol):
-            for j in range(self.game.numButtonRow):
-                ## Button Innit
-
-
-                if i % 4 == 0: #make 1st beats stand out
-                    self.game.ToggleButton[i][j].button("", int(xBuffer + i* (self.game.displayW/self.game.numButtonCol)),
-                                                   int(yBuffer+   j*(self.game.displayH/self.game.numButtonRow)) , buttonSize , buttonSize,
-                                                   self.game.red,
-                                                   self.game.bright_red)
-
-                else:
-                    self.game.ToggleButton[i][j].button("", int(xBuffer + i * (self.game.displayW / self.game.numButtonCol)),
-                                                   int(yBuffer + j * (self.game.displayH / self.game.numButtonRow)), buttonSize,
-                                                   buttonSize ,
-                                                   self.game.redhue,
-                                                   self.game.bright_red)
-
-                ## make button
-
-
-
-            """

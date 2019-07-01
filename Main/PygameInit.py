@@ -2,6 +2,7 @@ import pygame
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
 from Main.DrumPage.DrumMain import DrumLoop
+from Main.DrumPage.ModDrum import ModifyDrumLoop
 import os
 
 class Game:
@@ -9,12 +10,13 @@ class Game:
         pygame.init()
         pygame.mixer.init()
 
+
         # will this work if there is no loopfile?
         playFile = 'Sounds/kit1/loop.wav'
         pygame.mixer.music.load(playFile)
 
         #todo: prompt size
-        self.displayW = 800#00
+        self.displayW = 800#800
         self.displayH = 600#600
 
         self.black = (0, 0, 0)
@@ -26,6 +28,7 @@ class Game:
         self.red = (200,0,0)
         self.yellow = (247,217,15)
         self.bright_yellow= (255,255,0)
+        self.bright_gray =(230,230,230)
         self.green = (0,255,0)
         self.bright_red = (255, 0, 0)
         self.orange = (255,115,0)
@@ -36,8 +39,14 @@ class Game:
         self.FLAG=0
         self.drumSounds = getSoundNames('Sounds')
 
+        self.drumloopFlag = 1
+        self.moddrumFlag = 0
+
+        self.modifyDrumPage= ModifyDrumLoop(self)
+
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
+        self.BiggerText = pygame.font.Font('freesansbold.ttf', 15)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
@@ -62,7 +71,10 @@ class Game:
 
         self.bpm = 95
 
+
         self.drumMain = DrumLoop(self)
+
+
 
 
     def game_loop(self):
@@ -76,10 +88,13 @@ class Game:
                 self.gameDisplay.fill(self.lightpurple)
 
 
+                if self.drumloopFlag == 1:
+                    self.drumMain()
+
+                if self.moddrumFlag == 1:
+                    self.modifyDrumPage()
 
 
-
-                self.drumMain()
 
             pygame.display.update()
             #self.clock.tick_busy_loop()
@@ -87,11 +102,9 @@ class Game:
 
 
 
-
     def text_objects(self,text, font, color = (0,0,0)):
         textSurface = font.render(text, True, color)
         return textSurface, textSurface.get_rect()
-
 
 
 
