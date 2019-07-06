@@ -70,5 +70,6 @@ class SoundCircle():
 
 
             if click[0] == 1:
-                self.playSOUND = pygame.mixer.Channel(0).play(pygame.mixer.Sound(self.game.soundNames[self.id]))
+                sound2play=self.game.measures.sounds[self.game.activeMeasure][self.id]
+                self.playSOUND = pygame.mixer.Channel(0).play(pygame.mixer.Sound(sound2play))
 

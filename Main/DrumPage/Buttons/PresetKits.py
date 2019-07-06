@@ -24,6 +24,11 @@ class PresetKit():
             self.presets[i/self.cols][i % self.cols] = toggleBtn(self.game,1)
 
 
+            if i ==0:
+                self.presets[i][i].toggleState=1
+
+
+
         count = self.length % self.cols
         self.presets[-1] = self.presets[-1][:count]
 
@@ -60,21 +65,35 @@ class PresetKit():
 
         TextSurf, TextRect = self.game.text_objects("Drumkits", self.game.BiggerText)
 
-        TextRect.center = ((xBuffer + self.game.displayW*.1), (yBuffer - 10))
-
+        if len(self.presets)<2:
+            TextRect.center = (int(xBuffer + self.game.displayW*.1 - buttonSize/3 ), (yBuffer - 10))
+        else:
+            TextRect.center = ((xBuffer + self.game.displayW * .1+ buttonSize/3), (yBuffer - 10))
         self.game.gameDisplay.blit(TextSurf, TextRect)
 
 
         for i in range(len(self.presets)):
             for j in range(len(self.presets[i])):
-                self.presets[i][j].button(str(self.soundKits[count % len(self.soundKits)]),
-                                          int(xBuffer + i * (self.game.displayW*.8 / self.rows/3)),
-                                                    int(yBuffer+j*(self.game.displayH * 0.8 / self.cols)),
-                                                    buttonSize,
-                                                    buttonSize/2,
-                                                    self.game.white,
-                                                    self.game.bright_gray,
-                                                    str(self.soundKits[count % len(self.soundKits)]))
+
+                if  len(self.presets)>2:
+                    self.presets[i][j].button(str(self.soundKits[count % len(self.soundKits)]),
+                                              int(xBuffer + i * (self.game.displayW*.8 / self.rows/2)),
+                                                        int(yBuffer+j*(self.game.displayH * 0.8 / self.cols)),
+                                                        buttonSize,
+                                                        buttonSize/2,
+                                                        self.game.white,
+                                                        self.game.bright_gray,
+                                                        str(self.soundKits[count % len(self.soundKits)]))
+                else:
+                    self.presets[i][j].button(str(self.soundKits[count % len(self.soundKits)]),
+                                              int(xBuffer + i * (self.game.displayW * .8 / self.rows / 3)),
+                                              int(yBuffer + j * (self.game.displayH * 0.8 / self.cols)),
+                                              buttonSize,
+                                              buttonSize / 2,
+                                              self.game.white,
+                                              self.game.bright_gray,
+                                              str(self.soundKits[count % len(self.soundKits)]))
+
 
 
 
@@ -87,11 +106,4 @@ class PresetKit():
                                 self.presets[row][col].toggleState = 0
 
                     self.activePreset = (i,j)
-
-        # have preset be able to be selected like measure
-
-        # if preset is selected sounds() will load on the right to sounds()
-
-        # if the sounds load there should be a toggle to move them to the left circles
-
 

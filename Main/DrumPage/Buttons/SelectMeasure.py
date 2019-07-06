@@ -9,10 +9,22 @@ class Measures():
         self.y = y
         self.measure = [0] * self.game.numberofmeasures
         self.measureStates = [0] * self.game.numberofmeasures
+        self.sounds = [0] * self.game.numberofmeasures
+
+        stock = ['kick', 'snare', 'hhcl', 'hhop', 'ride', 'crash', 'rim', 'shaker']
         for i in range(self.numberofmeasures):
             self.measure[i] = toggleBtn(self.game,1)
             self.measureStates[i] = toggleBtn(self.game)
+            self.sounds[i] = []
+
+            for j in range(self.game.numButtonRow):
+                self.sounds[i].append('Sounds/stock/' + stock[j % self.game.numButtonRow] + '.wav')
+
+
         self.measure[0].toggleState= self.game.activeMeasure
+
+
+
 
 
     def __call__(self, *args, **kwargs):
@@ -27,8 +39,7 @@ class Measures():
                                     (self.game.buttonSize*2),
                                     self.game.white,
                                     self.game.bright_gray
-
-                                    , str(i +1))
+                                   ,str(i +1))
 
             self.measureStates[i].button("",
                                          self.x + i * self.game.buttonSize*2  + self.game.buttonSize *19/20,

@@ -9,11 +9,10 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
+        self.numButtonRow = 8
+        self.numButtonCol=  16
+        self.numberofmeasures=4
 
-
-        # will this work if there is no loopfile?
-        playFile = 'Sounds/kit1/loop.wav'
-        pygame.mixer.music.load(playFile)
 
         #todo: prompt size
         self.displayW = 800#800
@@ -42,7 +41,7 @@ class Game:
         self.drumloopFlag = 1
         self.moddrumFlag = 0
 
-        self.modifyDrumPage= ModifyDrumLoop(self)
+
 
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
@@ -55,12 +54,12 @@ class Game:
         self.clock = pygame.time.Clock()
 
         #todo check how many soundnames there are
-        self.numButtonRow = 8
-        self.numButtonCol=  16
+
+        self.modifyDrumPage= ModifyDrumLoop(self)
 
 
 
-        self.numberofmeasures=4
+
         self.grid = [0] * self.numberofmeasures
 
         for i in range(self.numberofmeasures):

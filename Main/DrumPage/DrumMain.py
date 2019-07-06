@@ -16,11 +16,6 @@ class DrumLoop():
         self.game.moddrumsBtn = ModifyDrumKit(self.game,self.game.yellow,self.game.bright_yellow)
 
 
-        ## REPLACE SOON
-        self.game.soundNames = ['kick', 'snare', 'hhcl', 'hhop', 'ride', 'crash', 'rim', 'shaker']
-        for i in range(len(self.game.soundNames)):
-            self.game.soundNames[i] = 'Sounds/kit1/' + self.game.soundNames[i] + '.wav'
-
 
 
         if DESIGN is 1:

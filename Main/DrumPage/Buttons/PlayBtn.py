@@ -89,19 +89,19 @@ class PlayAll:
 
 
                         if self.game.measures.measureStates[k].toggleState==1:
-                            res += makeWav(self.states, self)
+                            res += makeWav(self,k)
 
 
 
 
 
-                    playFile = 'Sounds/kit1/loop55.wav'
+                    playFile = 'SaveFiles/LoopAll.wav'
                     pygame.mixer.music.pause()
                     ##ghetto way of loading a new sound so pydub can't overwrite on the file that is loaded.
-                    pygame.mixer.music.load(self.game.soundNames[1])
+                    pygame.mixer.music.load('SaveFiles/Dummy.wav')
 
 
-                    res.export('Sounds/kit1/loop55.wav', format="wav")
+                    res.export('SaveFiles/LoopAll.wav', format="wav")
 
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
@@ -186,18 +186,17 @@ class PlayOne:
                         for j in range(len(self.game.grid[0].ToggleButton[0])):
                             self.states[j][i] = self.game.grid[self.game.activeMeasure].ToggleButton[i][j].toggleState
 
-                    playSound = makeWav(self.states,self)
+                    res = makeWav(self,self.game.activeMeasure)
 
-                    playFile= 'Sounds/kit1/loop5.wav'
+                    playFile = 'SaveFiles/LoopAll.wav'
                     pygame.mixer.music.pause()
                     ##ghetto way of loading a new sound so pydub can't overwrite on the file that is loaded.
-                    pygame.mixer.music.load(self.game.soundNames[0])
+                    pygame.mixer.music.load('SaveFiles/Dummy.wav')
 
-                    playSound.export('Sounds/kit1/loop5.wav', format="wav")
+                    res.export('SaveFiles/LoopAll.wav', format="wav")
 
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
-
 
                 else:
                     self.game.string = "playOneStoped"
@@ -205,20 +204,32 @@ class PlayOne:
 
 
 
-def makeWav(states,self):
+def makeWav(self,measurenum):
     beat_in_milli = 60.0 / self.bpm * 1000 / 4
 
     blankBeat = AudioSegment.silent(duration=beat_in_milli)
+
+
 
 
     sounds = [0] * len(self.states)
     for i in range(len(self.states)):
 
 
-        sounds[i] = AudioSegment.from_wav(self.game.soundNames[i])
+        # self.game.measures.sounds[self.game.activeMeasure]
+        sounds[i] = AudioSegment.from_wav(self.game.measures.sounds[measurenum][i])
+
+
         if len(sounds[i]) > beat_in_milli:
+
+            # allow the sound to play even if its longer than the beat if there is "silence" for the duration of the
+            #sound.
+
+
+            # Makes the sound as long as the beat. I want to change this
             sounds[i] = sounds[i][:beat_in_milli]
-        else:
+
+        else: # the beat is longer than the sound so add music to it.
             blanktime = beat_in_milli - len(sounds[i])
             blank = AudioSegment.silent(duration=blanktime)
             sounds[i] += blank
@@ -234,6 +245,54 @@ def makeWav(states,self):
 
     for i in range(1, len(sounds)):
         sounds[0] = sounds[0].overlay(sounds[i], position=0)
+
+
+
+
+    return sounds[0]
+
+
+def makeWavSave(states,self):
+    beat_in_milli = 60.0 / self.bpm * 1000 / 4
+
+    blankBeat = AudioSegment.silent(duration=beat_in_milli)
+
+
+    sounds = [0] * len(self.states)
+    for i in range(len(self.states)):
+
+
+        # self.game.measures.sounds[self.game.activeMeasure]
+        sounds[i] = AudioSegment.from_wav(self.game.measures.sounds[self.game.activeMeasure][i])
+
+
+        if len(sounds[i]) > beat_in_milli:
+
+            # allow the sound to play even if its longer than the beat if there is "silence" for the duration of the
+            #sound.
+
+
+            # Makes the sound as long as the beat. I want to change this
+            sounds[i] = sounds[i][:beat_in_milli]
+
+        else: # the beat is longer than the sound so add music to it.
+            blanktime = beat_in_milli - len(sounds[i])
+            blank = AudioSegment.silent(duration=blanktime)
+            sounds[i] += blank
+
+        newsound = 0
+        for j in range(len(self.states[0])):
+            if self.states[i][j] == 0:
+                newsound += blankBeat
+            else:
+                newsound += sounds[i]
+
+        sounds[i] = newsound
+
+    for i in range(1, len(sounds)):
+        sounds[0] = sounds[0].overlay(sounds[i], position=0)
+
+
 
 
     return sounds[0]
