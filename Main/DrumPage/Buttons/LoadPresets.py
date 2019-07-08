@@ -32,6 +32,8 @@ class LoadPreset():
             if i == 0 or i == self.length-1:
                 self.savedkits[i].savedStatus=stock
 
+                self.savedkits[i].name="stock"
+
         self.savedkits[0].toggleState = 1
 
         self.activeToggle = 0
@@ -82,19 +84,26 @@ class LoadPreset():
                                          "Blank")
 
             else:
-                self.savedkits[i].button("Kit " + str(i+1),
+
+                if self.savedkits[i].name == "stock":
+                    kitName = "stock"
+                else:
+                    kitName ="Kit " + str(i+1)
+
+                self.savedkits[i].button(kitName,
                                           int(xBuffer + (self.game.displayW * .8)),
                                           int(yBuffer*1.2 + i * (self.game.displayH * 0.8/len(self.savedkits))),
                                           buttonSize,
                                           buttonSize / 3,
                                           self.game.white,
                                           self.game.bright_gray,
-                                         "Kit " + str(i+1))
+                                         kitName)
 
 
 
 
             if self.savedkits[i].toggleState == 1:
+
 
                 for j in range(len(self.savedkits)):
                     if j != i:

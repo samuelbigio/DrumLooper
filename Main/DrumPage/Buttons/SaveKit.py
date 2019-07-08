@@ -39,14 +39,29 @@ class SaveKit():
             TextSurf, TextRect = self.game.text_objects("press me", self.game.largeText)
             TextRect.center = ((x + w / 2), (y + h / 2))
 
+
+            #LoadNum = self.game.modifyDrumPage.loadpresets.activeToggle
+            #print self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus
+
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
             if click[0] == 1:
 
+
                 LoadNum = self.game.modifyDrumPage.loadpresets.activeToggle
 
-                self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus=\
-                    self.game.measures.sounds[self.game.activeMeasure][:]
+
+                newstr = []
+
+                for i in range(len(self.game.measures.sounds[self.game.activeMeasure])):
+                    newstr.append(self.game.measures.sounds[self.game.activeMeasure][i])
+
+                self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus = newstr
+
+
+                # this is used because there are some kits inatilized to stock and if a kit is saved over then it will
+                # be rewritten and no longer displayed as "Stock".
+                self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].name = ""
 
 
 

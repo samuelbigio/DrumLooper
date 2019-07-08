@@ -1,6 +1,6 @@
 import pygame
 
-
+###LOAD col that has all kits that were saved
 
 class LoadSavedKit():
     def __init__(self, game):
@@ -95,8 +95,11 @@ class toggleBtn:
                 LoadNum = self.game.modifyDrumPage.loadpresets.activeToggle
 
                 if (self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus is not None):
-                    self.game.measures.sounds[self.game.activeMeasure] = \
-                        self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus
+                    newstr = []
+                    for i in self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus:
+                        newstr.append(i)
+                    self.game.measures.sounds[self.game.activeMeasure] = newstr
+                        #self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus[:] same thing but i had a bug
 
 
                 self.toggleState=0

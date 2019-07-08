@@ -187,6 +187,7 @@ class PlayOne:
                             self.states[j][i] = self.game.grid[self.game.activeMeasure].ToggleButton[i][j].toggleState
 
                     res = makeWav(self,self.game.activeMeasure)
+                    #resTest = makeSaveWav(self,self.game.activeMeasure)
 
                     playFile = 'SaveFiles/LoopAll.wav'
                     pygame.mixer.music.pause()
@@ -194,6 +195,7 @@ class PlayOne:
                     pygame.mixer.music.load('SaveFiles/Dummy.wav')
 
                     res.export('SaveFiles/LoopAll.wav', format="wav")
+                    #resTest.export('SaveFiles/LoopTest.wav', format="wav")
 
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
@@ -205,6 +207,99 @@ class PlayOne:
 
 
 def makeWav(self,measurenum):
+    beat_in_milli = 60.0 / self.bpm * 1000 / 4
+
+    blankBeat = AudioSegment.silent(duration=beat_in_milli)
+
+
+
+
+    sounds = [0] * len(self.states)
+    for i in range(len(self.states)):
+
+
+        # self.game.measures.sounds[self.game.activeMeasure]
+        sounds[i] = AudioSegment.from_wav(self.game.measures.sounds[measurenum][i])
+
+
+        """
+        
+        # grabs the sound clip in a beat and adds silence to the end if needed to complete the beat or clips it
+        if len(sounds[i]) > beat_in_milli:
+
+            # allow the sound to play even if its longer than the beat if there is "silence" for the duration of the
+            #sound.
+
+
+            # Makes the sound as long as the beat. I want to change this
+            sounds[i] = sounds[i][:beat_in_milli]
+
+        else: # the beat is longer than the sound so add music to it.
+            blanktime = beat_in_milli - len(sounds[i])
+            blank = AudioSegment.silent(duration=blanktime)
+            sounds[i] += blank
+        """
+        newsound = 0
+
+        """
+
+        for j in range(len(self.states[0])):
+            if self.states[i][j] == 0:
+                newsound += blankBeat
+            else:
+                newsound += sounds[i]
+
+    """
+        num=1
+        statesChart = []
+        for j in range(len(self.states[0])):
+            if self.states[i][j] == 0:
+                num +=1
+            else:
+                statesChart.append(num)
+                num =1
+
+
+
+
+        if statesChart != []:
+            print statesChart
+        if statesChart == []:
+            res = AudioSegment.silent(duration=beat_in_milli*16)
+
+        else:
+
+            res =  AudioSegment.silent(duration=(statesChart[0] - 1)*beat_in_milli )
+            for j in range(1,len(statesChart)):
+                length = statesChart[j] * beat_in_milli
+
+                if len(sounds[i]) > length:
+                    res +=sounds[i][:length]
+                else:
+                    missing= length - len(sounds[i])
+                    res += sounds[i]
+                    res += AudioSegment.silent(duration=missing)
+
+            length = 16*beat_in_milli - len(res)
+            if len(sounds[i]) > length:
+                res += sounds[i][:length]
+            else:
+                missing = length - len(sounds[i])
+                res += sounds[i]
+                res += AudioSegment.silent(duration=missing)
+
+        sounds[i] = res
+
+
+    for i in range(1, len(sounds)):
+        sounds[0] = sounds[0].overlay(sounds[i], position=0)
+
+
+    return sounds[0]
+
+
+
+def makeSaveWav(self,measurenum):
     beat_in_milli = 60.0 / self.bpm * 1000 / 4
 
     blankBeat = AudioSegment.silent(duration=beat_in_milli)
@@ -252,47 +347,3 @@ def makeWav(self,measurenum):
     return sounds[0]
 
 
-def makeWavSave(states,self):
-    beat_in_milli = 60.0 / self.bpm * 1000 / 4
-
-    blankBeat = AudioSegment.silent(duration=beat_in_milli)
-
-
-    sounds = [0] * len(self.states)
-    for i in range(len(self.states)):
-
-
-        # self.game.measures.sounds[self.game.activeMeasure]
-        sounds[i] = AudioSegment.from_wav(self.game.measures.sounds[self.game.activeMeasure][i])
-
-
-        if len(sounds[i]) > beat_in_milli:
-
-            # allow the sound to play even if its longer than the beat if there is "silence" for the duration of the
-            #sound.
-
-
-            # Makes the sound as long as the beat. I want to change this
-            sounds[i] = sounds[i][:beat_in_milli]
-
-        else: # the beat is longer than the sound so add music to it.
-            blanktime = beat_in_milli - len(sounds[i])
-            blank = AudioSegment.silent(duration=blanktime)
-            sounds[i] += blank
-
-        newsound = 0
-        for j in range(len(self.states[0])):
-            if self.states[i][j] == 0:
-                newsound += blankBeat
-            else:
-                newsound += sounds[i]
-
-        sounds[i] = newsound
-
-    for i in range(1, len(sounds)):
-        sounds[0] = sounds[0].overlay(sounds[i], position=0)
-
-
-
-
-    return sounds[0]
