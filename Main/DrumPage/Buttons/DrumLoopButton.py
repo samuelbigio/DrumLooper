@@ -26,7 +26,7 @@ class DrumLoopButton():
         h = self.h
         deafultColor = self.deafultColor
         otherColor = self.otherColor
-        onStr = "Menu"
+        onStr = "MainMenu"
 
         name = "Drum Loop"
         mouse = pygame.mouse.get_pos()

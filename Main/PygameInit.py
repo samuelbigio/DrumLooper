@@ -1,51 +1,29 @@
 import pygame
-from Main.DrumPage.Buttons.ToggleButtons import Grid
-from Main.DrumPage.ToolBar import Tool
-from Main.DrumPage.DrumMain import DrumLoop
-from Main.DrumPage.ModDrum import ModifyDrumLoop
-import os
+
+from MainMenu import MainMenu
+
 
 class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
-        self.numButtonRow = 8
-        self.numButtonCol=  16
-        self.numberofmeasures=4
-
 
         #todo: prompt size
         self.displayW = 800#800
         self.displayH = 600#600
 
-        self.black = (0, 0, 0)
-        self.blue = (50,100,220)
-        self.bright_blue = (0,0,255)
-        self.white = (255, 255, 255)
-        self.lightpurple = (205, 205, 255)
-        self.redhue = (160, 0, 10)
-        self.red = (200,0,0)
-        self.yellow = (247,217,15)
-        self.bright_yellow= (255,255,0)
-        self.bright_gray =(230,230,230)
-        self.green = (0,255,0)
-        self.bright_red = (255, 0, 0)
-        self.orange = (255,115,0)
-        self.orangehue = (255, 90, 10)
+        self.getColors()
         self.buttonSize = 20
-        self.activeMeasure = 1
         self.string = "innit"
         self.FLAG=0
-        self.drumSounds = getSoundNames('Sounds')
-
-        self.drumloopFlag = 1
-        self.moddrumFlag = 0
 
 
 
 
         self.largeText = pygame.font.Font('freesansbold.ttf', 10)
         self.BiggerText = pygame.font.Font('freesansbold.ttf', 15)
+
+        self.menuText = pygame.font.Font('freesansbold.ttf', 25)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
@@ -55,25 +33,9 @@ class Game:
 
         #todo check how many soundnames there are
 
-        self.modifyDrumPage= ModifyDrumLoop(self)
 
 
-
-
-        self.grid = [0] * self.numberofmeasures
-
-        for i in range(self.numberofmeasures):
-            self.grid[i] = Grid(self)
-
-
-        self.toolbar = Tool(self)
-
-        self.bpm = 95
-
-
-        self.drumMain = DrumLoop(self)
-
-
+        self.mainmenu = MainMenu(self)
 
 
     def game_loop(self):
@@ -86,14 +48,7 @@ class Game:
 
                 self.gameDisplay.fill(self.lightpurple)
 
-
-                if self.drumloopFlag == 1:
-                    self.drumMain()
-
-                if self.moddrumFlag == 1:
-                    self.modifyDrumPage()
-
-
+                self.mainmenu()
 
             pygame.display.update()
             #self.clock.tick_busy_loop()
@@ -112,12 +67,19 @@ class Game:
         TextRect.center = (self.dialCenter)
         self.gameDisplay.blit(TextSurf, TextRect)
 
-def getSoundNames(dir):
-    soundnames = []
-    count = 0
-    for filename in os.listdir(dir):
-        soundnames.append([])
-        for j in os.listdir(dir + '/' + filename):
-            soundnames[count].append(dir + '/' + filename + '/' + j)
-        count += 1
-    return soundnames
+
+    def getColors(self):
+        self.black = (0, 0, 0)
+        self.blue = (50, 100, 220)
+        self.bright_blue = (0, 0, 255)
+        self.white = (255, 255, 255)
+        self.lightpurple = (205, 205, 255)
+        self.redhue = (160, 0, 10)
+        self.red = (200, 0, 0)
+        self.yellow = (247, 217, 15)
+        self.bright_yellow = (255, 255, 0)
+        self.bright_gray = (230, 230, 230)
+        self.green = (0, 255, 0)
+        self.bright_red = (255, 0, 0)
+        self.orange = (255, 115, 0)
+        self.orangehue = (255, 90, 10)

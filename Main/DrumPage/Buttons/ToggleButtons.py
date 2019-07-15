@@ -8,7 +8,12 @@ class toggleBtn:
         self.toggleState = 0
         self.stayonFlag = stayonFlag
 
-    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr =""):
+    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr ="",fontSize = None, hoverStr= "",
+               whenClicked = None):
+
+        if fontSize is None:
+            fontSize = self.game.largeText
+
         self.name = name
 
         mouse = pygame.mouse.get_pos()
@@ -17,7 +22,7 @@ class toggleBtn:
         if self.toggleState == 0:
             pygame.draw.rect(self.game.gameDisplay, deafultColor, (x, y, w, h))
 
-            TextSurf, TextRect = self.game.text_objects(name, self.game.largeText)
+            TextSurf, TextRect = self.game.text_objects(name, fontSize)
 
             TextRect.center = ((x + w / 2), (y + h / 2))
 
@@ -26,7 +31,7 @@ class toggleBtn:
         else:
             pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
 
-            TextSurf, TextRect = self.game.text_objects(onStr, self.game.largeText)
+            TextSurf, TextRect = self.game.text_objects(onStr, fontSize)
 
             TextRect.center = ((x + w / 2), (y + h / 2))
 
@@ -37,14 +42,30 @@ class toggleBtn:
             if self.toggleState == 0:
                 pygame.draw.rect(self.game.gameDisplay, otherColor, (x, y, w, h))
 
+                pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
+
+                TextSurf, TextRect = self.game.text_objects(hoverStr, fontSize)
+
+                TextRect.center = ((x + w / 2), (y + h / 2))
+
+                self.game.gameDisplay.blit(TextSurf, TextRect)
+
             # pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
             if click[0] == 1:
+
+
+
                 if self.stayonFlag ==0:
                     self.toggleState ^= 1
 
                 if self.stayonFlag !=0:
                     if self.toggleState ==0:
                         self.toggleState=1
+
+
+                if whenClicked is not None: #function call
+                    whenClicked()
+
 
                 # pass #is clicked
                 # pygame.mixer_music.play(-1)

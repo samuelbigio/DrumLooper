@@ -4,6 +4,12 @@ from pydub import AudioSegment
 
 
 
+PLOT = 0
+if PLOT is 1:
+    import scipy.io.wavfile
+    import matplotlib.pyplot as plt
+
+
 class PlayAll:
     def __init__(self,game,name, x, y, w, h, defaultColor, otherColor):
         self.game = game
@@ -103,6 +109,16 @@ class PlayAll:
 
                     res.export('SaveFiles/LoopAll.wav', format="wav")
 
+                    if PLOT is 1:
+                        rate, data = scipy.io.wavfile.read('SaveFiles/LoopAll.wav')
+                        plt.clf()
+                        plt.figure(1)
+                        plt.title('Signal Wave...')
+                        plt.plot(data)
+                        plt.savefig('test.png')
+
+
+
                     pygame.mixer.music.load(playFile)
                     pygame.mixer.music.play(-1)
 
@@ -195,6 +211,10 @@ class PlayOne:
                     pygame.mixer.music.load('SaveFiles/Dummy.wav')
 
                     res.export('SaveFiles/LoopAll.wav', format="wav")
+
+
+
+
                     #resTest.export('SaveFiles/LoopTest.wav', format="wav")
 
                     pygame.mixer.music.load(playFile)
@@ -222,34 +242,6 @@ def makeWav(self,measurenum):
         sounds[i] = AudioSegment.from_wav(self.game.measures.sounds[measurenum][i])
 
 
-        """
-        
-        # grabs the sound clip in a beat and adds silence to the end if needed to complete the beat or clips it
-        if len(sounds[i]) > beat_in_milli:
-
-            # allow the sound to play even if its longer than the beat if there is "silence" for the duration of the
-            #sound.
-
-
-            # Makes the sound as long as the beat. I want to change this
-            sounds[i] = sounds[i][:beat_in_milli]
-
-        else: # the beat is longer than the sound so add music to it.
-            blanktime = beat_in_milli - len(sounds[i])
-            blank = AudioSegment.silent(duration=blanktime)
-            sounds[i] += blank
-        """
-        newsound = 0
-
-        """
-
-        for j in range(len(self.states[0])):
-            if self.states[i][j] == 0:
-                newsound += blankBeat
-            else:
-                newsound += sounds[i]
-
-    """
         num=1
         statesChart = []
         for j in range(len(self.states[0])):
@@ -262,8 +254,7 @@ def makeWav(self,measurenum):
 
 
 
-        if statesChart != []:
-            print statesChart
+
         if statesChart == []:
             res = AudioSegment.silent(duration=beat_in_milli*16)
 
