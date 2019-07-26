@@ -1,9 +1,9 @@
-import pygame
+
 from Main.DrumPage.ModDrum import ModifyDrumLoop
-import os
 from Main.DrumPage.Buttons.ToggleButtons import Grid
 from Main.DrumPage.ToolBar import Tool
 from Main.DrumPage.DrumSequencerMain import DrumLoop
+from Main.MISC.getFiles import getFilesFromFolder as getSoundNames
 
 
 class DrumsMain():
@@ -47,12 +47,3 @@ class DrumsMain():
 
 
 
-def getSoundNames(dir):
-    soundnames = []
-    count = 0
-    for filename in os.listdir(dir):
-        soundnames.append([])
-        for j in os.listdir(dir + '/' + filename):
-            soundnames[count].append(dir + '/' + filename + '/' + j)
-        count += 1
-    return soundnames

@@ -1,4 +1,6 @@
 from Main.DrumPage.Buttons.ToggleButtons import toggleBtn
+from Main.SynthPage.SoundGenerator import makeScale
+import pygame
 
 
 #self.game.mainmenu.synthMain.displaynotes
@@ -40,6 +42,31 @@ class DisplayScale():
                                         #function call back
                                        )
 
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_TAB]:
+
+            if self.activeScale ==-1:
+                self.activeScale= self.scales[0]
+                self.scaleButton[0].toggleState=1
+
+            else:
+                activescalenum=0
+                for i in self.scaleButton:
+                    if i.toggleState is 1:
+                        break
+
+                    activescalenum +=1
+
+                self.scaleButton[activescalenum].toggleState=0
+
+                newnum = (1 + activescalenum)% len(self.scaleButton)
+                self.activeScale = self.scales[(1 + activescalenum)% len(self.scaleButton)]
+
+                self.scaleButton[newnum].toggleState=1
+
+
+
 
 
     def noteclicked(self,num):
@@ -52,7 +79,4 @@ class DisplayScale():
 
         else:
             self.activeScale = self.scales[num]
-
-
-
 

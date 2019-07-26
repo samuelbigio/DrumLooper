@@ -5,20 +5,29 @@ from Main.SynthPage.SoundGenerator import getScales
 from Main.SynthPage.DisplayOctaves import DisplayOctaves
 from Main.SynthPage.SoundGenerator import getFreqs
 from Main.SynthPage.play import PlayBtn
+from Main.SynthPage.DisplayRhythm import DisplayRhythmSprits
+from Main.SynthPage.DisplayMelody import DisplayMelody
+from Main.SynthPage.insert import InsertNote
 
-VERBOSE = 1
+VERBOSE = 0
 
 #self.game.mainmenu.synthMain.
 class SynthMain():
     def __init__(self,game):
         self.game= game
+
         self.scales = getScales()
         self.freqs = getFreqs()
         self.displaynotes = DisplayNotes(self.game)
         self.displayscale = DisplayScale(self.game)
         self.displayroot = DisplayRoot(self.game)
+
+
         self.displayoctave =DisplayOctaves(self.game)
         self.synthPlay = PlayBtn(self.game)
+        self.sprits = DisplayRhythmSprits(self.game)
+        self.melody = DisplayMelody(self.game)
+        self.insertNote = InsertNote(self.game)
 
 
 
@@ -30,11 +39,16 @@ class SynthMain():
         self.game.printBPM()
         self.game.dialUp()
         self.game.dialDown()
+
         self.displaynotes()
         self.displayscale()
         self.displayroot()
+
         self.displayoctave()
         self.synthPlay()
+        self.sprits()
+        self.melody()
+        self.insertNote()
 
 
         if VERBOSE == 1:

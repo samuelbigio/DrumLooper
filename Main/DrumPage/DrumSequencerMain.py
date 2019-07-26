@@ -1,5 +1,5 @@
 import pygame
-from MISC.center_circles import CenterDesign
+from Main.MISC.center_circles import CenterDesign
 from Main.DrumPage.Buttons.SoundTester import SoundTest
 from Buttons.ModDrums import ModifyDrumKit
 
@@ -18,8 +18,8 @@ class DrumLoop():
 
 
 
-        if DESIGN is 1:
-            self.game.design = CenterDesign(self.game)
+
+
 
     def __call__(self, *args, **kwargs):
 
@@ -55,7 +55,7 @@ class DrumLoop():
 
 
         if Verbose == 1:
-            TextSurfDebug, TextRectDebug = self.game.text_objects(str(self.game.string), self.game.largeText)
+            TextSurfDebug, TextRectDebug = self.game.text_objects(str(self.game.synthFlag), self.game.largeText)
             TextRectDebug.center = (self.game.displayW / 2, int(self.game.displayH * .9 + self.game.displayH * .05))
             self.game.gameDisplay.blit(TextSurfDebug, TextRectDebug)
 

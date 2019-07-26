@@ -14,12 +14,8 @@ class DisplayRoot():
 
 
 
+
         #self.game.mainmenu.synthMain.noteFreqs = getFreqs()
-
-
-
-
-
 
 
 
@@ -64,7 +60,6 @@ class DisplayRoot():
                 if i not in self.rootDict:
                     self.rootDict[i] = -1
 
-            #print self.rootDict
         else:
             self.rootDict = None
 

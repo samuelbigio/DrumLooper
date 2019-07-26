@@ -2,7 +2,7 @@ import pygame
 from Main.MainMenuButtons.DrumsMain import DrumsMain
 from Main.MainMenuButtons.SynthMain import SynthMain
 from Main.DrumPage.Buttons.ToggleButtons import toggleBtn
-
+from Main.MainMenuButtons.PlayDrumsAndSynth import PlayDrumsAndSynth
 
 
 class MainMenu():
@@ -10,10 +10,14 @@ class MainMenu():
         self.game=game
         self.drumButton = toggleBtn(self.game)
         self.synthButton = toggleBtn(self.game)
+        self.allButton = toggleBtn(self.game)
         self.drummain =  DrumsMain(self.game)
         self.synthMain = SynthMain(self.game)
         self.goBackToMenu = toggleBtn(self.game)
+        self.playboth = PlayDrumsAndSynth(self.game)
         self.mainMenuFlag=1
+
+
 
         self.Status="None"
 
@@ -42,14 +46,24 @@ class MainMenu():
             elif self.Status == "Synth":
                 self.synthMain()
 
+            elif self.Status == "Both":
+                self.playboth()
+
+
 
 
         else:
 
+            TextSurf, TextRect = self.game.text_objects("DrumLooper", self.game.GameText)
+
+            TextRect.center = (self.game.displayW/2.,self.game.displayH * .1 )
+
+            self.game.gameDisplay.blit(TextSurf, TextRect)
+
             self.drumButton.button("Make Drums",
-                                   self.game.displayW * .2,
+                                   (self.game.displayW/2.)- int(self.game.displayW * .35)/2. ,
                                    self.game.displayH * .2,
-                                   int(self.game.displayW * .4),
+                                   int(self.game.displayW * .35),
                                    int(self.game.displayH * .1),
                                    self.game.white,
                                    self.game.bright_gray,
@@ -59,9 +73,9 @@ class MainMenu():
 
 
             self.synthButton.button("Make Synth",
-                                   self.game.displayW * .6,
-                                   self.game.displayH * .4,
-                                   int(self.game.displayW * .4),
+                                   (self.game.displayW/2.) - int(self.game.displayW * .35)/2.  ,
+                                   self.game.displayH * .2 +int(self.game.displayH * .15) ,
+                                   int(self.game.displayW * .35),
                                    int(self.game.displayH * .1),
                                    self.game.white,
                                    self.game.bright_gray,
@@ -69,13 +83,30 @@ class MainMenu():
                                    hoverStr="Make Melodies",
                                    whenClicked=self.SynthMenu)
 
+            if self.game.synthFlag:
+
+                self.allButton.button("Play Drums + Synth",
+                                        (self.game.displayW / 2.) - int(self.game.displayW * .35) / 2.,
+                                        self.game.displayH * .2 + int(self.game.displayH * .15 * 2),
+                                        int(self.game.displayW * .35),
+                                        int(self.game.displayH * .1),
+                                        self.game.white,
+                                        self.game.bright_gray,
+                                        fontSize=self.game.BiggerText,
+                                        hoverStr="",
+                                        whenClicked=self.BothMenu)
 
 
 
+    def BothMenu(self):
+        self.allButton.toggleState=0
+        self.mainMenuFlag =0
+        self.Status = "Both"
 
     def DrumMenu(self):
         self.mainMenuFlag =0
         self.Status = "Drums"
+
 
     def SynthMenu(self):
         self.goBackToMenu.toggleState = 0
@@ -83,6 +114,10 @@ class MainMenu():
         self.Status = "Synth"
 
     def goToMenu(self):
+        pygame.mixer.music.stop()
+        self.playboth.playandpause.toggleState=0
+        self.game.play.toggleState=0
+        self.game.play1.toggleState=0
         self.drumButton.toggleState =0
         self.synthButton.toggleState =0
         self.mainMenuFlag=1

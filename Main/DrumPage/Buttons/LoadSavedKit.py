@@ -1,4 +1,5 @@
 import pygame
+from ToggleButtons import toggleBtn
 
 ###LOAD col that has all kits that were saved
 
@@ -46,66 +47,25 @@ class LoadSavedKit():
                                  buttonSize/3,
                                  self.game.lightpurple,
                                  self.game.yellow,
-                                 "Load " + str(self.game.activeMeasure +1))
+                                 "Load " + str(self.game.activeMeasure +1),
+                                 whenClicked= self.whenClicked)
+
+
+    def whenClicked(self):
+        LoadNum = self.game.modifyDrumPage.loadpresets.activeToggle
+
+        if (self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus is not None):
+            newstr = []
+            for i in self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus:
+                newstr.append(i)
+            self.game.measures.sounds[self.game.activeMeasure] = newstr
+            # self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus[:] same thing but i had a bug
+
+
+        self.Loadkits.toggleState = 0
 
 
 
 
 
 
-class toggleBtn:
-
-    def __init__(self, game,stayonFlag=0):
-        self.game = game
-        self.toggleState = 0
-        self.stayonFlag = stayonFlag
-
-    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr =""):
-        self.name = name
-
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-
-        if self.toggleState == 0:
-            pygame.draw.rect(self.game.gameDisplay, deafultColor, (x, y, w, h))
-
-            TextSurf, TextRect = self.game.text_objects(name, self.game.largeText)
-
-            TextRect.center = ((x + w / 2), (y + h / 2))
-
-            self.game.gameDisplay.blit(TextSurf, TextRect)
-
-        else:
-            pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
-
-            TextSurf, TextRect = self.game.text_objects(onStr, self.game.largeText)
-
-            TextRect.center = ((x + w / 2), (y + h / 2))
-
-            self.game.gameDisplay.blit(TextSurf, TextRect)
-
-        if ((mouse[0] < (x + w) and mouse[0] > x) and (mouse[1] < (y + h) and mouse[1] > y)):
-
-            if self.toggleState == 0:
-                pygame.draw.rect(self.game.gameDisplay, otherColor, (x, y, w, h))
-
-            # pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
-            if click[0] == 1:
-
-                LoadNum = self.game.modifyDrumPage.loadpresets.activeToggle
-
-                if (self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus is not None):
-                    newstr = []
-                    for i in self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus:
-                        newstr.append(i)
-                    self.game.measures.sounds[self.game.activeMeasure] = newstr
-                        #self.game.modifyDrumPage.loadpresets.savedkits[LoadNum].savedStatus[:] same thing but i had a bug
-
-
-                self.toggleState=0
-
-                # pass #is clicked
-                # pygame.mixer_music.play(-1)
-
-                # pygame.draw.circle(self.game.gameDisplay, otherColor, (x + w / 2, y + h / 2), 10)
-                # pygame.draw.rect(self.game.gameDisplay, self.game.white, (x, y, w, h))

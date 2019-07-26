@@ -8,8 +8,11 @@ class toggleBtn:
         self.toggleState = 0
         self.stayonFlag = stayonFlag
 
-    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr ="",fontSize = None, hoverStr= "",
+    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr ="",fontSize = None, hoverStr= "", onColor = None,
                whenClicked = None):
+
+        if onColor is None:
+            onColor = self.game.green
 
         if fontSize is None:
             fontSize = self.game.largeText
@@ -29,7 +32,7 @@ class toggleBtn:
             self.game.gameDisplay.blit(TextSurf, TextRect)
 
         else:
-            pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
+            pygame.draw.rect(self.game.gameDisplay, onColor, (x, y, w, h))
 
             TextSurf, TextRect = self.game.text_objects(onStr, fontSize)
 
@@ -40,9 +43,8 @@ class toggleBtn:
         if ((mouse[0] < (x + w) and mouse[0] > x) and (mouse[1] < (y + h) and mouse[1] > y)):
 
             if self.toggleState == 0:
-                pygame.draw.rect(self.game.gameDisplay, otherColor, (x, y, w, h))
 
-                pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
+                pygame.draw.rect(self.game.gameDisplay, otherColor, (x, y, w, h))
 
                 TextSurf, TextRect = self.game.text_objects(hoverStr, fontSize)
 

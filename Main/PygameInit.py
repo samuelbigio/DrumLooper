@@ -1,5 +1,5 @@
 import pygame
-
+from Main.MISC.center_circles import CenterDesign
 from MainMenu import MainMenu
 
 
@@ -7,7 +7,7 @@ class Game:
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
-
+        self.synthFlag = 0
         #todo: prompt size
         self.displayW = 800#800
         self.displayH = 600#600
@@ -16,6 +16,7 @@ class Game:
         self.buttonSize = 20
         self.string = "innit"
         self.FLAG=0
+        self.design = CenterDesign(self)
 
 
 
@@ -24,6 +25,8 @@ class Game:
         self.BiggerText = pygame.font.Font('freesansbold.ttf', 15)
 
         self.menuText = pygame.font.Font('freesansbold.ttf', 25)
+
+        self.GameText = pygame.font.Font('freesansbold.ttf', 115)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 

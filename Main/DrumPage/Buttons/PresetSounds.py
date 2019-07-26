@@ -1,4 +1,5 @@
 import pygame
+from ToggleButtons import toggleBtn
 
 
 class PresetSound():
@@ -89,7 +90,8 @@ class PresetSound():
                                                         buttonSize/4,
                                                         self.game.white,
                                                         self.game.bright_gray,
-                                                        str(self.soundNames[count % len(self.soundNames)]))
+                                                        str(self.soundNames[count % len(self.soundNames)]),
+                                                        whenClicked= lambda : self.whenClicked(str(self.soundNames[count  ])))
 
 
 
@@ -104,81 +106,16 @@ class PresetSound():
                     self.activePreset = (i,j)
 
 
+    def whenClicked(self,name):
+        activei = self.game.modifyDrumPage.drumkits.activePreset[0] * 6
+        activej = self.game.modifyDrumPage.drumkits.activePreset[1]
 
-class toggleBtn:
+        sound = self.game.drumSounds[activej + activei][0].split('/')
+        sound = str(sound[0]) + '/' + str(sound[1]) + '/' + name + ".wav"
 
-    def __init__(self, game,stayonFlag=0):
-        self.game = game
-        self.toggleState = 0
-        self.stayonFlag = stayonFlag
+        self.game.modifyDrumPage.activeSound = sound
+        self.playSOUND = pygame.mixer.Channel(0).play(pygame.mixer.Sound(sound))
 
-    def button(self, name, x, y, w, h, deafultColor, otherColor, onStr =""):
-
-        if len(name)>9:
-            concatname = name[:9]
-        else:
-            concatname = name
-
-        self.name = name
-
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-
-        if self.toggleState == 0:
-            pygame.draw.rect(self.game.gameDisplay, deafultColor, (x, y, w, h))
-
-            TextSurf, TextRect = self.game.text_objects(concatname, self.game.largeText)
-
-            TextRect.center = ((x + w / 2), (y + h / 2))
-
-            self.game.gameDisplay.blit(TextSurf, TextRect)
-
-        else:
-            pygame.draw.rect(self.game.gameDisplay, self.game.green, (x, y, w, h))
-
-            TextSurf, TextRect = self.game.text_objects(onStr, self.game.largeText)
-
-            TextRect.center = ((x + w / 2), (y + h / 2))
-
-            self.game.gameDisplay.blit(TextSurf, TextRect)
-
-        if ((mouse[0] < (x + w) and mouse[0] > x) and (mouse[1] < (y + h) and mouse[1] > y)):
-
-            if self.toggleState == 0:
-                pygame.draw.rect(self.game.gameDisplay, otherColor, (x, y, w, h))
-
-            # pygame.draw.circle(self.game.gameDisplay,otherColor,(x+ w/2,y+ h/2),10)
-            if click[0] == 1:
-
-                activei = self.game.modifyDrumPage.drumkits.activePreset[0] * 6
-                activej = self.game.modifyDrumPage.drumkits.activePreset[1]
-
-                sound = self.game.drumSounds[activej+activei][0].split('/')
-                sound = str(sound[0]) + '/' + str(sound[1])+ '/' + name + ".wav"
-
-                self.game.modifyDrumPage.activeSound = sound
-                self.playSOUND = pygame.mixer.Channel(0).play(pygame.mixer.Sound(sound))
-
-                num =self.game.modifyDrumPage.soundtestToggle.activeToggle
-                if  num != -1:
-                    self.game.measures.sounds[self.game.activeMeasure][num] = sound
-
-
-                #self.game.modifyDrumPage.soundtestToggle.btnStates[num].toggleState = 0
-                #self.game.modifyDrumPage.soundtestToggle.activeToggle =-1
-
-
-
-
-                if self.stayonFlag ==0:
-                    self.toggleState ^= 1
-
-                if self.stayonFlag !=0:
-                    if self.toggleState ==0:
-                        self.toggleState=1
-
-                # pass #is clicked
-                # pygame.mixer_music.play(-1)
-
-                # pygame.draw.circle(self.game.gameDisplay, otherColor, (x + w / 2, y + h / 2), 10)
-                # pygame.draw.rect(self.game.gameDisplay, self.game.white, (x, y, w, h))
+        num = self.game.modifyDrumPage.soundtestToggle.activeToggle
+        if num != -1:
+            self.game.measures.sounds[self.game.activeMeasure][num] = sound

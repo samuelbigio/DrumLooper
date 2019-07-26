@@ -31,25 +31,35 @@ def getFreqs():
         notedict[str(noteLetters[(i+48) % len(noteLetters)] + str( (i + 48 )/len(noteLetters)))] = 440 * 2 **((i - 9.)/12)
     return notedict
 
+def getSillence(beat, bpm = 60):
+    length = (60. / bpm) * 1000. / 4 * beat * 16
 
-def getSinSound(freq,subdivison, bpm = 60):
-    beat_in_mili = (60. / bpm) * 1000. /subdivison
+    return AudioSegment.silent(duration=length )
+
+def getSinSound(freq,beat, bpm = 60):
+
+
+
+    beat_in_mili = (60. / bpm) * 1000. /4 * beat*16
+
+
+
     sin = Sine(freq)
     sound = sin.to_audio_segment(beat_in_mili)
     sound = sound.fade_in(int(beat_in_mili*.05))
     sound = sound.fade_out(int(beat_in_mili*.05))
     return sound
 
-def getSquareSound(freq,subdivison, bpm=60):
-    beat_in_mili = (60. / bpm) * 1000. /subdivison
+def getSquareSound(freq,beat,subdivison, bpm=60):
+    beat_in_mili = (60. / bpm) * 1000. /subdivison * beat
     square = Square(freq)
     sound = square.to_audio_segment(beat_in_mili)
     sound = sound.fade_in(int(beat_in_mili*.05))
     sound = sound.fade_out(int(beat_in_mili*.05))
     return sound
 
-def getSawSound(freq,subdivison, bpm=60):
-    beat_in_mili = (60. / bpm) * 1000. /subdivison
+def getSawSound(freq,beat,subdivison, bpm=60):
+    beat_in_mili = (60. / bpm) * 1000. /subdivison *beat
     saw = Sawtooth(freq)
     sound = saw.to_audio_segment(beat_in_mili)
     sound = sound.fade_in(int(beat_in_mili*.05))
