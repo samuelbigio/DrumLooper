@@ -5,11 +5,11 @@
 
 Table of Contents
 ==================
-[Installing](https://github.com/samuelbigio/DrumLooper/#installing)
-[Drum Page](https://github.com/samuelbigio/DrumLooper/#drum)
-[Synth Page](https://github.com/samuelbigio/DrumLooper/#synth)
-[Play Both](https://github.com/samuelbigio/DrumLooper/#playboth)
-[Learning](https://github.com/samuelbigio/DrumLooper/#learning)
+[Installing](https://github.com/samuelbigio/DrumLooper/#installing)  
+[Drum Page](https://github.com/samuelbigio/DrumLooper/#drum)  
+[Synth Page](https://github.com/samuelbigio/DrumLooper/#synth)  
+[Play Both](https://github.com/samuelbigio/DrumLooper/#playboth)  
+[Learning](https://github.com/samuelbigio/DrumLooper/#learning)  
 
 # Drums
 ## Drum Sequencer
@@ -157,7 +157,7 @@ The Play Button Plays the notes dictated by the user in the grid
 
 
 
-# Play Both
+# PlayBoth
 ![Play Both](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/PlayBoth.png)
 Once the Synth Page is opened then the user can see a new window on the main menu.
 When this is selected the user can hit the play button and hear the created drum patterns and synth melody
