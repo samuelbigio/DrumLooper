@@ -1,6 +1,6 @@
 # DrumLooper
 
-#### By Samuel Bigio
+By Samuel Bigio
 
 
 Table of Contents
@@ -184,3 +184,4 @@ In music this is known as a time signature and 4/4 is known as common time.
 ### Octave
 
 # Installing
+[Zip With .exe](https://drive.google.com/open?id=1FV62ySMou_qc5eepr1XvZnzHq8_OVCsl)
