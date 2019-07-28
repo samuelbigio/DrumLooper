@@ -253,6 +253,8 @@ All the white keys in a key signature but the intervals are not following the mi
 
 
 # Installing
+Below is a link to a zip file hosted in google drive with an executable that can run on windows.  
+
 [Zip With .exe](https://drive.google.com/open?id=1FV62ySMou_qc5eepr1XvZnzHq8_OVCsl)
 
 This program needs pygames and pydubs to run. Pydub requires ffmpeg as a dependency to run and that usually gives me an 
