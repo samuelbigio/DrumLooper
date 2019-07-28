@@ -173,7 +173,7 @@ the in game time signature is in 4/4, what this means is that the quarter note g
 Eigth note requires eigth notes in a 4/4 time signautre to complete a measure. An eigth note is half of a quarter note. 1/8 of a meausre
 instead of 1/4. In music each downbeat is a counted as a beat in a measure. For example, a measure with four quarter notes are counted as 1 2 3 4. If there are eigth notes in a whole measure these will be counted as "One and two and three and four and", finally the way
 to subdivde 16th notes is by placing an "e" and an "a" sound in a measure. A measure with 16th notes is written in the following
->>1 e + a, 2 e + a, 3 e + a, 4 e + a  
+>1 e + a, 2 e + a, 3 e + a, 4 e + a  
 ![Subdivisions](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/subdivision.png)
 
 #### Dotted Notes
@@ -186,12 +186,12 @@ Rest are to denote where music is not played. When counting subdivisions in musi
 ### BPM
 BPM stands for beats per minute. A BPM of 60 means that there are 60 beats in a minute, or 1 beat per second. In a 4/4 time signature at 60 BPM one measure is 4 seconds. In a 144 BPM measure how many seconds are in a beat? 
 
->> 60/144 x 4 = 1.666 seconds in a measure. 
+> 60/144 x 4 = 1.666 seconds in a measure. 
 
 ### Semitone
 There are 12 different notes in western music 
 
->> C C# D D# E F F# G G# A A# B  
+> C C# D D# E F F# G G# A A# B  
 
 Each note has a distance of one semitone. The *#* in music are also known as accidentinals. These accidentals represent black keys on 
 a normal piano. 
@@ -199,7 +199,7 @@ a normal piano.
 ![Piano](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/piano.png)
 
 Each time a C is repeated it is a new octave or 12 semitones apart. C4 is the fourth C in music. Each musical pitch is a different frequency. The faster a note cycles the higher pitch it will sound. The international music standard is having A4 at 440 Hz. In order to represent a semitone in music every note above middle C, *C4* is n  
->> 440 * 2<sup>(n-9)/12 </sup>  
+> 440 * 2<sup>(n-9)/12 </sup>  
 There is a great wikipedia article on this [Scientific pitch notation](https://en.wikipedia.org/wiki/Scientific_pitch_notation)
 
 ### Octave
@@ -228,24 +228,24 @@ In music the distance between notes are called intervals. The intervals are a ra
 
 ### Scales
 In music you can create scales with different steps between each note to form a pattern. A note asscending in one semitone is known as a *half* step while a note with two semitones is known as a *whole* step. A major scale has the pattern of
->> Whole, Whole Half, Whole, Whole, Whole, Half
+> Whole, Whole Half, Whole, Whole, Whole, Half
 
 Take for instance a C note as a root, (also known as tonic) of a scale. 
-A whole step from a C or two semitones would Be C -> ~~D#~~ -> __D__  
+A whole step from a C or two semitones would be  C -> ~~D#~~ -> __D__  
 You can do this with the whole scale to yeild all Natural notes, *notes without accidentals*,
->> C D E F G A B 
+> C D E F G A B 
   This corresponds to all the white keys on a keyboard.
 
 A scale starting at C# would yeild all accidetals
->> C# D# E F# G# A# B C
+> C# D# E F# G# A# B C
   A minor scale has the steps  
->> Whole Half Whole Whole Half Whole (*augmented*, 3 semitones), Half
+> Whole Half Whole Whole Half Whole (*augmented*, 3 semitones), Half
 
->> C D D# F G G# A# C
+> C D D# F G G# A# C
 
 If you drop a root two semitones down then you would yeild the relative minor. What this means is the key signature, how many accidentals in the scale, is the same. The relative minor to a C major scale is an A minor. An A minor is  
 
->> A B C D E F G A
+> A B C D E F G A
 
 All the white keys in a key signature but the intervals are not following the minor scale progression because of the root note.
 
