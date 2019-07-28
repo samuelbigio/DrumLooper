@@ -10,6 +10,7 @@ Table of Contents
 [Synth Page](https://github.com/samuelbigio/DrumLooper/#synth)  
 [Play Both](https://github.com/samuelbigio/DrumLooper/#playboth)  
 [Learning](https://github.com/samuelbigio/DrumLooper/#learning)  
+[Acknowledgements](https://github.com/samuelbigio/DrumLooper/#acknowledgements)
 
 # Drums
 The Drum page allows users to sequence percusive sounds in the order they choose. You can have 8 unique drum sounds at once per measure.
@@ -254,4 +255,23 @@ All the white keys in a key signature but the intervals are not following the mi
 # Installing
 [Zip With .exe](https://drive.google.com/open?id=1FV62ySMou_qc5eepr1XvZnzHq8_OVCsl)
 
+This program needs pygames and pydubs to run. Pydub requires ffmpeg as a dependcy to run and that usually gives me an 
+error when porting to a different OS. Below is a command to run to install the respective packages, however to you can just   pip install pygame  pip install pydub  with as many lines.
+  Here is a guide in installing [FFmpeg](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg). 
+
+```
+pip freeze > requirments.txt  
+pip install -R requirments.txt
+```
+
+# Acknowledgements
+[Pygame](https://www.pygame.org/news)  
+[Sentdex Pygame tutorial](https://www.youtube.com/watch?v=ujOTNg17LjI)  
+[Pydub](https://github.com/jiaaro/pydub)  
+[FFmpeg](https://ffmpeg.org/)  
+Wikipedia  
+My mentor Cody Oliver  
+George my oldest friend  
+Jose my oldest brother  
+Georgia Tech
 
