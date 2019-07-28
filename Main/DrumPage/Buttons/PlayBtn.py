@@ -4,10 +4,6 @@ from pydub import AudioSegment
 
 
 
-PLOT = 0
-if PLOT is 1:
-    import scipy.io.wavfile
-    import matplotlib.pyplot as plt
 
 
 class PlayAll:
@@ -108,14 +104,6 @@ class PlayAll:
 
 
                     res.export('SaveFiles/LoopAll.wav', format="wav")
-
-                    if PLOT is 1:
-                        rate, data = scipy.io.wavfile.read('SaveFiles/LoopAll.wav')
-                        plt.clf()
-                        plt.figure(1)
-                        plt.title('Signal Wave...')
-                        plt.plot(data)
-                        plt.savefig('test.png')
 
 
 

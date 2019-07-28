@@ -6,10 +6,6 @@ from Main.SynthPage.SoundGenerator import getSillence
 
 
 
-PLOT = 0
-if PLOT is 1:
-    import scipy.io.wavfile
-    import matplotlib.pyplot as plt
 
 
 class PlayAll:
@@ -128,13 +124,6 @@ class PlayAll:
 
                 res.export(playFile, format="wav")
 
-                if PLOT is 1:
-                    rate, data = scipy.io.wavfile.read(playFile)
-                    plt.clf()
-                    plt.figure(1)
-                    plt.title('Signal Wave...')
-                    plt.plot(data)
-                    plt.savefig('test.png')
 
 
                 self.loadstr= ""

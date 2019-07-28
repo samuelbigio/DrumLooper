@@ -1,11 +1,9 @@
 from pydub.generators import Sine
 from pydub.generators import Square
 from pydub.generators import Sawtooth
-import scipy.io.wavfile
-from math import *
+
 from pydub import AudioSegment
-import scipy.io.wavfile
-import matplotlib.pyplot as plt
+
 
 filename2 = 'Test.wav'
 
@@ -202,23 +200,3 @@ def makeScale(root,scale):
 
 
 
-"""
-res = makeBluesScale('C4')
-
-res.export(filename2, format="wav")
-
-
-rate, data = scipy.io.wavfile.read(filename2)
-plt.clf()
-plt.figure(1)
-plt.title('Signal Wave...')
-plt.plot(data)
-plt.show()
-plt.savefig('test.png')
-
-
- eigthnote = pygame.image.load('Synth Page/Sprits/eigthNote.png')
-                eigthnote = pygame.transform.scale(eigthnote, (100, 100))
-                self.eigthnote = eigthnote
-                self.gameDisplay.blit(self.eigthnote, (self.displayW / 2., self.displayH / 2.))
-"""

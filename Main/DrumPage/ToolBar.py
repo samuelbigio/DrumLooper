@@ -15,7 +15,7 @@ class Tool():
         buttonsize = 20
         widthgap= int(self.game.displayW  *.05)
 
-        self.game.play = PlayAll(game,"play", widthgap,self.yBuffer/4 +buttonsize/4, buttonsize,buttonsize, self.game.red,
+        self.game.play = PlayAll(game,"Play", widthgap,self.yBuffer/4 +buttonsize/4, buttonsize,buttonsize, self.game.red,
                               self.game.bright_red)
 
 

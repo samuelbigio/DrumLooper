@@ -21,12 +21,12 @@ class Game:
 
 
 
-        self.largeText = pygame.font.Font('freesansbold.ttf', 10)
-        self.BiggerText = pygame.font.Font('freesansbold.ttf', 15)
+        self.largeText = pygame.font.SysFont("Garamond", 13)
+        self.BiggerText = pygame.font.SysFont("Garamond", 18)
 
-        self.menuText = pygame.font.Font('freesansbold.ttf', 25)
+        self.menuText = pygame.font.SysFont("Garamond", 28)
 
-        self.GameText = pygame.font.Font('freesansbold.ttf', 115)
+        self.GameText = pygame.font.SysFont("Garamond", 118)
 
         self.gameDisplay = pygame.display.set_mode((self.displayW, self.displayH))
 
