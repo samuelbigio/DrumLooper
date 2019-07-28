@@ -271,6 +271,7 @@ pip install -R requirments.txt
 [Sentdex Pygame tutorial](https://www.youtube.com/watch?v=ujOTNg17LjI)  
 [Pydub](https://github.com/jiaaro/pydub)  
 [FFmpeg](https://ffmpeg.org/)  
+[Auto py to exe](https://pypi.org/project/auto-py-to-exe/)  
 Wikipedia  
 My mentor Cody Oliver  
 George my oldest friend  
