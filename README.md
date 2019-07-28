@@ -139,15 +139,15 @@ the insertion is capturted and the user will be able to click undo. After the Un
 
 ### Keyboard HotKeys
 The Synth page has hotkeys added to create a better user experience.  
-<kbd>tab</kbd> -> Switch to the next scale
-<kbd>a</kbd> -> Move left on the selected rythm
-<kbd>d</kbd> -> Move right on the selected rythm
-<kbd>w</kbd> -> Move upwards on the selected note. Keep in mind if a scale is selected
-the next note that is selected will be the next note in the scale.
-<kbd>s</kbd> -> Move Downwards on the selected note. See above
-<kbd>0</kbd> -> <kbd>8</kbd> Change between respective octave
-<kbd>r</kbd> -> Toggle between *rest* and *note*
-<kbd>.</kbd> -> Toggle between *Dotted note/rest* and *Not Dotted note/rest*
+<kbd>tab</kbd> -> Switch to the next scale  
+<kbd>a</kbd> -> Move left on the selected rythm  
+<kbd>d</kbd> -> Move right on the selected rythm  
+<kbd>w</kbd> -> Move upwards on the selected note. Keep in mind if a scale is selected  
+the next note that is selected will be the next note in the scale.  
+<kbd>s</kbd> -> Move Downwards on the selected note. See above  
+<kbd>0</kbd> -> <kbd>8</kbd> Change between respective octave  
+<kbd>r</kbd> -> Toggle between *rest* and *note*  
+<kbd>.</kbd> -> Toggle between *Dotted note/rest* and *Not Dotted note/rest*  
 
 ### Play 
 The Play Button Plays the notes dictated by the user in the grid
