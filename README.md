@@ -12,9 +12,14 @@ Table of Contents
 [Learning](https://github.com/samuelbigio/DrumLooper/#learning)  
 
 # Drums
+The Drum page allows users to sequence percusive sounds in the order they choose. You can have 8 unique drum sounds at once per measure.
+There are four different measures that you can loop in any asscending combination. At any time you are able to modify and customize each
+pattern to choose which percusive sound you would like to sequence.
+
 ## Drum Sequencer
 ![Drum sequencer](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/drumsequencer.png)
 
+In a grid of (16x8) boxes this is where you choose the order your music will play. 
 
 
 #### Grid
@@ -47,7 +52,8 @@ The BPM Dial stands for Beats Per Minute. You can increase the dial or decrease 
 See [BPM Dial In Learning](https://github.com/samuelbigio/DrumLooper/#bpm) to understand the theory behind this.
 
 #### Play Sound button
-The eight circles on the left of the grid repesents each different instrument. You can test the sound in each of them if they are pressed.
+The Drum Kit sounds are the yellow circles on the left most side of the page. This allow users to preview the current
+percusive sound in each row per pattern allowing the user to know what sound they are sequence. 
 
 ## Modify DrumKits
 The Modify Drum page allows you to change sounds of each measure of your drum loop. Note that each measure has a different kit but they 
@@ -60,7 +66,7 @@ the user to pick different pre assembled kits. For example the Neptune Kit is a 
 [The Neptunes](https://en.wikipedia.org/wiki/The_Neptunes). 
 
 #### Drum Kit Sounds
-The Drum Kit sounds are buttons that represent a sound in the respective drum kit.
+The Drum Kit sounds are buttons that represent a percusive sound in the respective drum kit.
 
 #### Load
 When the Load button is pressed this sound is loaded in the respective measures sound. This represent a sound in the row of the current
@@ -110,7 +116,7 @@ The set Rythms in this game are Whole Notes, Half Notes, Quarter Notes, Eigth No
 
 
 #### Dotted Notes
-In Music a adding a dot to a note elongates it by 1.5.[See Subdivision for the Theory](https://github.com/samuelbigio/DrumLooper/#subdivisions)
+In Music a adding a dot to a note elongates it by 1.5. [See Subdivision for the Theory](https://github.com/samuelbigio/DrumLooper/#subdivisions)
 
 #### Rest
 The Rest button allows a user to toggle between adding a note of the respective duration or a rest for that duration.
@@ -133,24 +139,15 @@ the insertion is capturted and the user will be able to click undo. After the Un
 
 ### Keyboard HotKeys
 The Synth page has hotkeys added to create a better user experience.  
-  <kbd>tab</kbd> -> Switch to the next scale  
-  <kbd>a</kbd> -> Move left on the selected rythm  
-  
-  <kbd>d</kbd> -> Move right on the selected rythm
-  
-  <kbd>w</kbd> -> Move upwards on the selected note. Keep in mind if a scale is selected
-  the next note that is selected will be the next note in the scale.
-  
-  <kbd>s</kbd> -> Move Downwards on the selected note. See above 
-  
-  
-  
-  <kbd>0</kbd> -> <kbd>8</kbd> Change between respective octave
-  
-  <kbd>r</kbd> -> Toggle between *rest* and *note*
-  
-  
-  <kbd>.</kbd> -> Toggle between *Dotted note/rest* and *Not Dotted note/rest*
+<kbd>tab</kbd> -> Switch to the next scale
+<kbd>a</kbd> -> Move left on the selected rythm
+<kbd>d</kbd> -> Move right on the selected rythm
+<kbd>w</kbd> -> Move upwards on the selected note. Keep in mind if a scale is selected
+the next note that is selected will be the next note in the scale.
+<kbd>s</kbd> -> Move Downwards on the selected note. See above
+<kbd>0</kbd> -> <kbd>8</kbd> Change between respective octave
+<kbd>r</kbd> -> Toggle between *rest* and *note*
+<kbd>.</kbd> -> Toggle between *Dotted note/rest* and *Not Dotted note/rest*
 
 ### Play 
 The Play Button Plays the notes dictated by the user in the grid
@@ -172,16 +169,89 @@ Also, the user is prompted if they are epileptic and if they choose that they ar
 ### Subdivisions
 There are 16 horizontal buttons in the grid so the measure is divided in 16th notes. 
 Every four beats is a quarter of the measure, or a quarter note. The quarter note is the downbeat for this grid because
-the music is in 4/4, what this means is that the quarter note gets the beat and there are four of them in a measure.
-In music this is known as a time signature and 4/4 is known as common time.  
+the in game time signature is in 4/4, what this means is that the quarter note gets the beat and there are four of them in a measure. An 
+Eigth note requires eigth notes in a 4/4 time signautre to complete a measure. An eigth note is half of a quarter note. 1/8 of a meausre
+instead of 1/4. In music each downbeat is a counted as a beat in a measure. For example, a measure with four quarter notes are counted as 1 2 3 4. If there are eigth notes in a whole measure these will be counted as "One and two and three and four and", finally the way
+to subdivde 16th notes is by placing an "e" and an "a" sound in a measure. A measure with 16th notes is written in the following
+>>1 e + a, 2 e + a, 3 e + a, 4 e + a  
+![Subdivisions](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/subdivision.png)
 
 #### Dotted Notes
-#### Rest
+Dotted notes allow music to add half the value of the note to the orginal value. For example a half note is worth 2 beats, *half of a 4 beat measure*, if you add a dot to a half note you will have 2 x 1.5 = 3 or 3 beats. 
 
+
+#### Rest
+Rest are to denote where music is not played. When counting subdivisions in music this is skipped so a quarter note on beat 1 of a measure with a dotted half measure (*3 rest*) will be only counted as 1. This is the same way a whole note will be counted but the whole note will be sustained for four beats opposed to the quarter note being *relased* at the end of beat 1. 
 
 ### BPM
+BPM stands for beats per minute. A BPM of 60 means that there are 60 beats in a minute, or 1 beat per second. In a 4/4 time signature at 60 BPM one measure is 4 seconds. In a 144 BPM measure how many seconds are in a beat? 
+
+>> 60/144 x 4 = 1.666 seconds in a measure. 
+
+### Semitone
+There are 12 different notes in western music 
+
+>> C C# D D# E F F# G G# A A# B  
+
+Each note has a distance of one semitone. The *#* in music are also known as accidentinals. These accidentals represent black keys on 
+a normal piano. 
+
+![Piano](https://github.com/samuelbigio/DrumLooper/blob/master/Main/MISC/piano.png)
+
+Each time a C is repeated it is a new octave or 12 semitones apart. C4 is the fourth C in music. Each musical pitch is a different frequency. The faster a note cycles the higher pitch it will sound. The international music standard is having A4 at 440 Hz. In order to represent a semitone in music every note above middle C, *C4* is n  
+>> 440 * 2<sup>(n-9)/12 </sup>  
+There is a great wikipedia article on this [Scientific pitch notation](https://en.wikipedia.org/wiki/Scientific_pitch_notation)
 
 ### Octave
+An octave is 12 semitones higher or lower than a given pitch. To raise an octave the frequency of a note is doubled and to lower an octave the frequency of a note is halved. 
+
+### Intervals
+In music the distance between notes are called intervals. The intervals are a ratio of the pitch, or frequency. For example an octave interval is the ratio 2:1, double the frequency. A *Perfect fith* is 3/2.  
+
+|Name|Ratio|Number of Semitones|
+|---|---|---|
+|Perfect Unison |1:1 |0|
+|Minor second | 16:15|1|
+|Major Second|9:8 |2|
+|Minor third|6:5 |3|
+|Major third|5:4 |4|
+|Perfect Fourth|4:3 |5|
+|Augmented fourth|45:32 |6|
+|Perfect Fifth|3:2 |7|
+|Minor Sixth|8:5 |8|
+|Major Sixth|5:3 |9|
+|Minor Seventh|16:9 |10|
+|Major Seventh|15:8 |11|
+|Perfect Octave|2:1 |12|
+
+  [Interval Music](https://en.wikipedia.org/wiki/Interval_(music))
+
+### Scales
+In music you can create scales with different steps between each note to form a pattern. A note asscending in one semitone is known as a *half* step while a note with two semitones is known as a *whole* step. A major scale has the pattern of
+>> Whole, Whole Half, Whole, Whole, Whole, Half
+
+Take for instance a C note as a root, (also known as tonic) of a scale. 
+A whole step from a C or two semitones would Be C -> ~~D#~~ -> __D__  
+You can do this with the whole scale to yeild all Natural notes, *notes without accidentals*,
+>> C D E F G A B 
+  This corresponds to all the white keys on a keyboard.
+
+A scale starting at C# would yeild all accidetals
+>> C# D# E F# G# A# B C
+  A minor scale has the steps  
+>> Whole Half Whole Whole Half Whole (*augmented*, 3 semitones), Half
+
+>> C D D# F G G# A# C
+
+If you drop a root two semitones down then you would yeild the relative minor. What this means is the key signature, how many accidentals in the scale, is the same. The relative minor to a C major scale is an A minor. An A minor is  
+
+>> A B C D E F G A
+
+All the white keys in a key signature but the intervals are not following the minor scale progression because of the root note.
+
+
 
 # Installing
 [Zip With .exe](https://drive.google.com/open?id=1FV62ySMou_qc5eepr1XvZnzHq8_OVCsl)
+
+
